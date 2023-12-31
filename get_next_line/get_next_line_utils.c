@@ -1,0 +1,60 @@
+/* ************************************************************************** */
+/*									      */
+/*							  :::	   ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*						      +:+ +:+	      +:+     */
+/*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
+/*						  +#+#+#+#+#+	+#+	      */
+/*   Created: 2023/12/31 02:02:23 by chlimous	       #+#    #+#	      */
+/*   Updated: 2023/12/31 02:41:32 by chlimous         ###   ########.fr       */
+/*									      */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+bool	is_eol(t_list *node)
+{
+	ssize_t	i;
+
+	if (!node)
+		return (false);
+	i = 0;
+	while (((char *)node->content)[i])
+	{
+		if (((char *)node->content)[i] == '\n')
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
+size_t	get_eol_index(t_list *node)
+{
+	ssize_t	i;
+
+	i = 0;
+	while (((char *)node->content)[i])
+	{
+		if (((char *)node->content)[i] == '\n')
+			return (i);
+		i++;
+	}
+	return (i - 1);
+}
+
+void	clear_lst_but_last(t_advlist *advlst)
+{
+	t_list	*current;
+	t_list	*temp;
+
+	current = advlst->head;
+	while (current->next)
+	{
+		temp = current -> next;
+		free(current->content);
+		free(current);
+		current = temp;
+	}
+	advlst->head = advlst->tail;
+	advlst->size = 1;
+}
