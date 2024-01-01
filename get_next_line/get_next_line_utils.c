@@ -6,13 +6,13 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/12/31 02:02:23 by chlimous	       #+#    #+#	      */
-/*   Updated: 2023/12/31 02:41:32 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/01/01 20:23:02 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-bool	is_eol(t_list *node)
+bool	gnl_is_eol(t_list *node)
 {
 	ssize_t	i;
 
@@ -28,7 +28,7 @@ bool	is_eol(t_list *node)
 	return (false);
 }
 
-size_t	get_eol_index(t_list *node)
+size_t	gnl_get_eol_index(t_list *node)
 {
 	ssize_t	i;
 
@@ -42,7 +42,7 @@ size_t	get_eol_index(t_list *node)
 	return (i - 1);
 }
 
-void	clear_lst_but_last(t_advlist *advlst)
+void	gnl_clear_lst_but_last(t_advlist *advlst)
 {
 	t_list	*current;
 	t_list	*temp;
