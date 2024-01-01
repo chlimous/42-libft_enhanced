@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 04:43:23 by chlimous          #+#    #+#             */
-/*   Updated: 2023/12/31 04:44:00 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/01/01 20:24:09 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # endif
 
 ssize_t		get_next_line(int fd, char **line);
-bool		is_eol(t_list *node);
-size_t		get_eol_index(t_list *node);
-void		clear_lst_but_last(t_advlist *advlst);
+bool		gnl_is_eol(t_list *node);
+size_t		gnl_get_eol_index(t_list *node);
+void		gnl_clear_lst_but_last(t_advlist *advlst);
 
 #endif

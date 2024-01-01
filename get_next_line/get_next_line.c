@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/12/29 18:07:22 by chlimous	       #+#    #+#	      */
-/*   Updated: 2023/12/31 04:14:09 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/01/01 20:23:50 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	trim_static(t_advlist *advlst, ssize_t eol_index)
 	char	*content;
 	ssize_t	len;
 
-	clear_lst_but_last(advlst);
+	gnl_clear_lst_but_last(advlst);
 	len = ft_strlen(advlst->head->content) - eol_index - 1;
 	if (len > 0)
 	{
@@ -80,7 +80,7 @@ static ssize_t	build_line(t_advlist *advlst, char **line)
 	ssize_t	len;
 	ssize_t	eol_index;
 
-	eol_index = get_eol_index(advlst->tail);
+	eol_index = gnl_get_eol_index(advlst->tail);
 	len = get_line_len(advlst, eol_index);
 	*line = malloc(sizeof(char) * (len + 1));
 	if (!line)
@@ -98,7 +98,7 @@ ssize_t	get_next_line(int fd, char **line)
 	ssize_t				bytesread;
 
 	bytesread = 1;
-	while (bytesread > 0 && !is_eol(advlst[fd].tail))
+	while (bytesread > 0 && !gnl_is_eol(advlst[fd].tail))
 	{
 		buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (!buffer)
