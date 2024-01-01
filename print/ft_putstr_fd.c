@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 21:17:20 by chlimous          #+#    #+#             */
-/*   Updated: 2023/12/14 18:01:52 by chlimous         ###   ########.fr       */
+/*   Created: 2024/01/01 16:11:41 by chlimous          #+#    #+#             */
+/*   Updated: 2024/01/01 16:11:42 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *str, int fd)
+ssize_t	ft_putstr_fd(char *str, int fd)
 {
-	write(fd, str, ft_strlen(str));
+	return (write(fd, str, ft_strlen(str)));
 }
