@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/12/13 12:43:02 by chlimous	       #+#    #+#	      */
-/*   Updated: 2023/12/31 05:03:26 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/01/02 20:21:54 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	*ft_memccpy(void *dest, const void *src, int c, size_t n);
+void	ft_free_pp(void **pp);
 
 #endif
