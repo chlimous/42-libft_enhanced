@@ -6,7 +6,7 @@
 #    By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	       #
 #						  +#+#+#+#+#+	+#+	       #
 #    Created: 2023/12/13 15:29:55 by chlimous	       #+#    #+#	       #
-#    Updated: 2024/01/02 20:21:00 by chlimous         ###   ########.fr        #
+#    Updated: 2024/01/03 01:43:01 by chlimous         ###   ########.fr        #
 #									       #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS += $(addprefix mem/, ft_bzero.c ft_calloc.c ft_free_pp.c ft_memccpy.c ft_me
 SRCS += $(addprefix conv/, ft_atoi.c ft_itoa.c ft_tolower.c ft_toupper.c)
 SRCS += $(addprefix check/, ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c)
 SRCS += $(addprefix string/, ft_split.c ft_strchr.c ft_strcpy.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_strncpy.c)
+SRCS += $(addprefix tab/, ft_rev_int_tab.c)
 SRCS += $(addprefix get_next_line/, get_next_line.c get_next_line_utils.c)
 SRCS += $(addprefix ft_printf/, ft_printf.c formatid_char.c formatid_string.c formatid_ptr.c formatid_intbase.c formatid_uintbase.c formatid_percent.c formatid_unknown.c)
 
