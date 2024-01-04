@@ -6,61 +6,54 @@
 /*   By: chlimous <marvin@42.fr>		    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/08/15 21:47:56 by chlimous	       #+#    #+#	      */
-/*   Updated: 2023/12/13 12:12:30 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/01/04 18:36:09 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_strndup(const char *src, int size)
+static bool	is_sep(char c, char const *sep_charset)
 {
-	char	*dest;
-	int		i;
-
-	dest = malloc(sizeof(char) * (size + 1));
-	if (!dest)
-		return (NULL);
-	i = 0;
-	while (src[i] && i < size)
+	while (*sep_charset)
 	{
-		dest[i] = src[i];
-		i++;
+		if (c == *sep_charset)
+			return (true);
+		sep_charset++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	return (false);
 }
 
-static int	word_size(const char *str, char c)
+static int	word_size(char const *str, char const *sep_charset)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (str[i] && str[i] != c)
+	while (str[i] && !is_sep(str[i], sep_charset))
 		i++;
 	return (i);
 }
 
-static int	count_words(const char *str, char c)
+static int	count_words(char const *str, char const *sep_charset)
 {
-	int	words;
+	size_t	words;
 
 	words = 0;
 	while (*str)
 	{
-		if (*str && *str != c)
+		if (*str && !is_sep(*str, sep_charset))
 		{
 			words++;
-			str += word_size(str, c);
+			str += word_size(str, sep_charset);
 		}
-		while (*str && *str == c)
+		while (*str && is_sep(*str, sep_charset))
 			str++;
 	}
 	return (words);
 }
 
-static void	free_matrix(char **strs, int size)
+static void	free_matrix(char **strs, size_t size)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (i < size)
@@ -73,29 +66,29 @@ static void	free_matrix(char **strs, int size)
 	strs = NULL;
 }
 
-char	**ft_split(char const *str, char c)
+char	**ft_split(char const *str, char const *sep_charset)
 {
-	char	**strs;
-	int		i;
+	char		**strs;
+	size_t		i;
 
-	strs = malloc(sizeof(char *) * (count_words(str, c) + 1));
+	strs = malloc(sizeof(char *) * (count_words(str, sep_charset) + 1));
 	if (!strs)
 		return (NULL);
 	i = 0;
 	while (*str)
 	{
-		if (*str && *str != c)
+		if (*str && !is_sep(*str, sep_charset))
 		{
-			strs[i] = ft_strndup(str, word_size(str, c));
+			strs[i] = ft_strndup(str, word_size(str, sep_charset));
 			if (!strs[i])
 			{
 				free_matrix(strs, i);
 				return (NULL);
 			}
-			str += word_size(str, c);
+			str += word_size(str, sep_charset);
 			i++;
 		}
-		while (*str && *str == c)
+		while (*str && is_sep(*str, sep_charset))
 			str++;
 	}
 	strs[i] = 0;
