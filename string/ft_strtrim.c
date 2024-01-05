@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:04:10 by chlimous          #+#    #+#             */
-/*   Updated: 2023/10/28 00:14:55 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/01/05 23:52:54 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static int	is_right_part(char const *s1, char const *set)
 
 static size_t	res_str_size(char const *s1, char const *set)
 {
-	int	trimmed;
-	int	i;
+	size_t	trimmed;
+	size_t	i;
 
 	i = 0;
 	while (s1[i] && is_set_char(s1[i], set))
@@ -56,7 +56,7 @@ static size_t	res_str_size(char const *s1, char const *set)
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*str;
-	int		i;
+	size_t	i;
 
 	str = malloc(sizeof(char) * res_str_size(s1, set) + 1);
 	if (!str)

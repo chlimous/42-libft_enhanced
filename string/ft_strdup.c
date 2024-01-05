@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/09/07 00:39:43 by chlimous	       #+#    #+#	      */
-/*   Updated: 2023/10/26 16:18:45 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/01/05 23:52:44 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_strdup(const char *src)
 {
 	char	*dest;
-	int		i;
+	size_t	i;
 
 	dest = malloc(sizeof(char) * (ft_strlen(src) + 1));
 	if (!dest)

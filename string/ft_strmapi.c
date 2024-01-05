@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:00:30 by chlimous          #+#    #+#             */
-/*   Updated: 2023/10/28 21:00:37 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/01/05 23:52:31 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	char	*res;
-	int		i;
+	size_t	i;
 
 	res = malloc(sizeof(char) * ft_strlen(s) + 1);
 	if (!res)
