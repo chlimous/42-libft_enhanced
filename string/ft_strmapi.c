@@ -6,13 +6,13 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 20:00:30 by chlimous          #+#    #+#             */
-/*   Updated: 2024/01/05 23:52:31 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/01/07 21:37:14 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+char	*ft_strmapi(char const *s, char (*f)(size_t, char))
 {
 	char	*res;
 	size_t	i;
