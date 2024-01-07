@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 01:42:04 by chlimous          #+#    #+#             */
-/*   Updated: 2024/01/06 00:14:03 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/01/07 22:03:55 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_rev_int_tab(int *tab, size_t size)
 {
 	size_t	i;
-	int	temp;
+	int		temp;
 
 	i = 0;
 	while (i < size / 2)
