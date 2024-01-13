@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/12/13 13:00:57 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/01/07 21:42:41 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/01/13 01:47:39 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void	ft_striteri(char *s, void (*f)(size_t, char *));
 char	*ft_strncpy(char *dest, char *src, size_t size);
 char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strndup(const char *src, size_t size);
+char	*ft_strdup_cat(const char *str1, const char *str2);
 
 #endif
