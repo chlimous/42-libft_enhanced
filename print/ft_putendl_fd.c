@@ -6,23 +6,25 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 16:11:25 by chlimous          #+#    #+#             */
-/*   Updated: 2024/01/01 16:11:26 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/01/13 01:54:17 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-ssize_t	ft_putendl_fd(char *s, int fd)
+ssize_t	ft_putendl_fd(char *str, int fd)
 {
-	ssize_t	size;
-	ssize_t	ret[2];
+	char	*dst;
+	ssize_t	written;
+	size_t	str_size;
 
-	size = 0;
-	ret[0] = ft_putstr_fd(s, fd);
-	size += ret[0];
-	ret[1] = ft_putchar_fd('\n', fd);
-	size += ret[1];
-	if (ret[0] == -1 || ret[1] == -1)
+	str_size = ft_strlen(str);
+	dst = malloc(sizeof(char) * (str_size + 2));
+	if (!dst)
 		return (-1);
-	return (size);
+	ft_memcpy(dst, str, str_size);
+	dst[str_size] = '\n';
+	dst[str_size + 1] = '\0';
+	written = ft_putstr_fd(dst, fd);
+	return (free(dst), written);
 }
