@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-static size_t	size_alloc(long n)
+static unsigned int	size_alloc(ssize_t n)
 {
-	size_t	size;
+	unsigned int	size;
 
 	size = 2;
 	if (n < 0)
@@ -32,29 +32,29 @@ static size_t	size_alloc(long n)
 
 char	*ft_itoa(int n)
 {
-	size_t	size;
-	int		i;
-	char	*res;
-	long	nlong;
+	unsigned int	size;
+	unsigned int	i;
+	char			*res;
+	ssize_t			ntemp;
 
-	nlong = n;
-	size = size_alloc(nlong);
+	ntemp = n;
+	size = size_alloc(ntemp);
 	res = malloc(sizeof(char) * size);
 	if (!res)
 		return (NULL);
-	if (nlong < 0)
+	if (ntemp < 0)
 	{
 		res[0] = '-';
-		nlong = -nlong;
+		ntemp = -ntemp;
 	}
 	res[size - 1] = '\0';
 	i = size - 2;
-	while (nlong / 10 != 0)
+	while (ntemp / 10 != 0)
 	{
-		res[i] = nlong % 10 + 48;
-		nlong /= 10;
+		res[i] = ntemp % 10 + 48;
+		ntemp /= 10;
 		i--;
 	}
-	res[i] = nlong % 10 + 48;
+	res[i] = ntemp % 10 + 48;
 	return (res);
 }
