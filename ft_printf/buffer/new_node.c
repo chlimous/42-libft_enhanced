@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   formatid_ptr.c                                     :+:      :+:    :+:   */
+/*   new_node.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 19:21:52 by chlimous          #+#    #+#             */
-/*   Updated: 2023/12/31 04:36:43 by chlimous         ###   ########.fr       */
+/*   Created: 2024/03/01 20:29:41 by chlimous          #+#    #+#             */
+/*   Updated: 2024/03/08 20:30:51 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	formatid_ptr(void *ptr, size_t size)
+/******************************************************************************
+ * @brief Makes a new node
+ * 
+ * @param c Character that goes in the new node
+ * @return t_node* New node
+******************************************************************************/
+t_node	*new_node(char c)
 {
-	char	*base;
+	t_node	*new;
 
-	if (!ptr)
-	{
-		ft_putstr_fd("(nil)", 1);
-		return (5);
-	}
-	if (!size)
-	{
-		ft_putstr_fd("0x", 1);
-		size += 2;
-	}
-	base = "0123456789abcdef";
-	if ((size_t)ptr / 16 != 0)
-		size = formatid_ptr((void *)((size_t)ptr / 16), size);
-	ft_putchar_fd(base[(size_t)ptr % 16], 1);
-	return (size + 1);
+	new = malloc(sizeof(t_node));
+	if (!new)
+		return (NULL);
+	new->c = c;
+	new->next = NULL;
+	return (new);
 }

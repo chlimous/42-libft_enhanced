@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   formatid_intbase.c                                 :+:      :+:    :+:   */
+/*   clear_buffer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 18:53:24 by chlimous          #+#    #+#             */
-/*   Updated: 2023/12/31 04:37:05 by chlimous         ###   ########.fr       */
+/*   Created: 2024/03/04 17:13:55 by chlimous          #+#    #+#             */
+/*   Updated: 2024/03/08 20:14:17 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	formatid_intbase(int nb, char *base, size_t size)
+/******************************************************************************
+ * @brief Frees the buffer
+ * 
+ * @param buffer Buffer
+******************************************************************************/
+void	clear_buffer(t_buffer buffer)
 {
-	long	lnb;
+	t_node	*current;
+	t_node	*tmp;
 
-	lnb = nb;
-	if (lnb < 0)
+	current = buffer.head;
+	while (current)
 	{
-		ft_putchar_fd('-', 1);
-		size++;
-		lnb = -lnb;
+		tmp = current->next;
+		free(current);
+		current = tmp;
 	}
-	if (lnb / ft_strlen(base) != 0)
-		size = formatid_intbase(lnb / ft_strlen(base), base, size);
-	ft_putchar_fd(base[lnb % ft_strlen(base)], 1);
-	return (size + 1);
 }
