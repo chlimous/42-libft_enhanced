@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/02/19 14:41:02 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/04/15 22:06:19 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/04/18 20:27:02 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@
 # define BASE_16_UP "0123456789ABCDEF"
 
 # define FLAGS "-+ #0"
-# define FLAGS_QTY 5
 
 # define LENGTH_0 ""
 # define LENGTH_1 "hh"
@@ -60,7 +59,6 @@ typedef enum s_length
 }	t_length;
 
 # define SPECIFIERS "cspdiuxX%nok"
-# define SPECIFIERS_QTY 12
 
 struct					s_elem;
 typedef struct s_elem	t_elem;

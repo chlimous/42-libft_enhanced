@@ -6,11 +6,11 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/02/20 21:07:20 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/03/16 16:57:59 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/04/18 20:28:12 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Parses all flags
@@ -22,13 +22,13 @@
 ******************************************************************************/
 const char	*parse_flags(const char *ptr, t_elem *elem, va_list args)
 {
-	const char *(*const	set_flag[FLAGS_QTY])(const char *, t_elem *) = \
-	{set_minus, set_plus, set_space, set_hash, set_zero};
+	const char *(*const	set_flag[])(const char *, t_elem *) = \
+	{set_minus, set_plus, set_space, set_hash, set_zero, 0};
 	int					i;
 
 	(void)args;
 	i = 0;
-	while (i < FLAGS_QTY)
+	while (set_flag[i])
 	{
 		if (*ptr == FLAGS[i])
 		{
