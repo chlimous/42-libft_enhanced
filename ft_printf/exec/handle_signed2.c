@@ -6,11 +6,11 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/03/15 23:55:59 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/04/11 18:35:50 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/04/15 22:07:23 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Manages argument length
@@ -46,11 +46,13 @@ intmax_t	handle_length_signed(va_list args, t_elem elem)
  * @param base Base
  * @return int Length of number
 ******************************************************************************/
-int	len_signed(intmax_t nb, char *base)
+int	len_signed(intmax_t nb, char *base, t_elem elem)
 {
 	int			len;
 	uintmax_t	tmp;
 
+	if (nb == 0 && elem.is_dot && elem.precision == 0)
+		return (0);
 	len = 1;
 	if (nb < 0)
 		tmp = nb * (-1);
@@ -72,18 +74,20 @@ int	len_signed(intmax_t nb, char *base)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	add_signed_nb(intmax_t nb, char *base, t_buffer *buffer)
+int	add_signed_nb(intmax_t nb, char *base, t_elem elem, t_buffer *buffer)
 {
 	uintmax_t	tmp;
 
+	if (nb == 0 && elem.is_dot && elem.precision == 0)
+		return (EXIT_SUCCESS);
 	if (nb < 0)
 		tmp = nb * (-1);
 	else
 		tmp = nb;
 	if (tmp / ft_strlen(base) != 0)
 	{
-		if (add_signed_nb((intmax_t)(tmp / ft_strlen(base)), base, buffer) \
-						== EXIT_FAILURE)
+		if (add_signed_nb((intmax_t)(tmp / ft_strlen(base)), base, elem, \
+					buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	if (add_node(buffer, base[tmp % ft_strlen(base)]) == EXIT_FAILURE)

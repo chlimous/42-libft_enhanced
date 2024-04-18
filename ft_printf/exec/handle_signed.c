@@ -6,11 +6,11 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/03/15 21:59:11 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/03/17 17:47:32 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/04/15 22:05:04 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Checks if number has a sign
@@ -81,13 +81,13 @@ static int	handle_minus(intmax_t nb, char *base, t_elem elem, t_buffer *buffer)
 	if (elem.is_dot)
 	{
 		if (fill_width(buffer, elem.precision - \
-				len_signed(nb, base), '0') == EXIT_FAILURE)
+				len_signed(nb, base, elem), '0') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
-	if (add_signed_nb(nb, base, buffer) == EXIT_FAILURE)
+	if (add_signed_nb(nb, base, elem, buffer) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (fill_width(buffer, elem.width - MAX(elem.precision + sign_len, \
-			len_signed(nb, base) + sign_len), ' ') == EXIT_FAILURE)
+			len_signed(nb, base, elem) + sign_len), ' ') == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -111,22 +111,22 @@ static int	handle_default(intmax_t nb, char *base, t_elem elem, \
 	{
 		if (add_sign(nb, elem, buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (fill_width(buffer, elem.width - (len_signed(nb, base) + \
+		if (fill_width(buffer, elem.width - (len_signed(nb, base, elem) + \
 						sign_len), '0') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	else
 	{
 		if (fill_width(buffer, elem.width - MAX(elem.precision + \
-		sign_len, len_signed(nb, base) + sign_len), ' ') == EXIT_FAILURE)
+		sign_len, len_signed(nb, base, elem) + sign_len), ' ') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		if (add_sign(nb, elem, buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
-	if (fill_width(buffer, elem.precision - len_signed(nb, base), \
+	if (fill_width(buffer, elem.precision - len_signed(nb, base, elem), \
 				'0') == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (add_signed_nb(nb, base, buffer) == EXIT_FAILURE)
+	if (add_signed_nb(nb, base, elem, buffer) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

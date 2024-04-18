@@ -6,11 +6,11 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/02/28 17:16:40 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/03/16 17:31:31 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/04/15 21:55:40 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Executes conversion for '-' flag
@@ -26,10 +26,10 @@ static int	handle_minus(uintptr_t adr, t_elem elem, t_buffer *buffer)
 	{
 		if (add_nodes(buffer, "0x") == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (add_unsigned_nb(adr, BASE_16_LOW, buffer) == EXIT_FAILURE)
+		if (add_unsigned_nb(adr, BASE_16_LOW, elem, buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		if (fill_width(buffer, elem.width - (len_unsigned(adr, \
-					BASE_16_LOW) + 2), ' ') == EXIT_FAILURE)
+					BASE_16_LOW, elem) + 2), ' ') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	else
@@ -56,11 +56,11 @@ static int	handle_default(uintptr_t adr, t_elem elem, t_buffer *buffer)
 	if (adr)
 	{
 		if (fill_width(buffer, elem.width - (len_unsigned(adr, \
-					BASE_16_LOW) + 2), ' ') == EXIT_FAILURE)
+					BASE_16_LOW, elem) + 2), ' ') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		if (add_nodes(buffer, "0x") == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (add_unsigned_nb(adr, BASE_16_LOW, buffer) == EXIT_FAILURE)
+		if (add_unsigned_nb(adr, BASE_16_LOW, elem, buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	else

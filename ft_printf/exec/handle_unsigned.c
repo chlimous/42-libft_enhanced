@@ -6,11 +6,11 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/03/15 21:54:31 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/04/13 13:55:04 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/04/15 21:54:00 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Manages argument length
@@ -60,15 +60,15 @@ static int	handle_minus(uintmax_t nb, char *base, t_elem elem, \
 		return (EXIT_FAILURE);
 	if (elem.is_dot)
 	{
-		if (fill_width(buffer, elem.precision - (len_unsigned(nb, base) + \
+		if (fill_width(buffer, elem.precision - (len_unsigned(nb, base, elem) + \
 			prefix_len_precision), '0') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
-	if (add_unsigned_nb(nb, base, buffer) == EXIT_FAILURE)
+	if (add_unsigned_nb(nb, base, elem, buffer) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (fill_width(buffer, elem.width - MAX(elem.precision \
 		- check_prefix_precision(nb, elem) + prefix_len_width, \
-		len_unsigned(nb, base) + prefix_len_width), ' ') == EXIT_FAILURE)
+		len_unsigned(nb, base, elem) + prefix_len_width), ' ') == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -89,7 +89,7 @@ static int	handle_default(uintmax_t nb, char *base, t_elem elem, \
 	{
 		if (add_prefix(nb, elem, buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (fill_width(buffer, elem.width - (len_unsigned(nb, base) + \
+		if (fill_width(buffer, elem.width - (len_unsigned(nb, base, elem) + \
 			check_prefix_width(nb, elem)), '0') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
@@ -97,16 +97,16 @@ static int	handle_default(uintmax_t nb, char *base, t_elem elem, \
 	{
 		if (fill_width(buffer, elem.width - MAX(elem.precision \
 			- check_prefix_precision(nb, elem) + \
-			check_prefix_width(nb, elem), len_unsigned(nb, base) \
+			check_prefix_width(nb, elem), len_unsigned(nb, base, elem) \
 			+ check_prefix_width(nb, elem)), ' ') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		if (add_prefix(nb, elem, buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
-	if (fill_width(buffer, elem.precision - (len_unsigned(nb, base) + \
+	if (fill_width(buffer, elem.precision - (len_unsigned(nb, base, elem) + \
 		check_prefix_precision(nb, elem)), '0') == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (add_unsigned_nb(nb, base, buffer) == EXIT_FAILURE)
+	if (add_unsigned_nb(nb, base, elem, buffer) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

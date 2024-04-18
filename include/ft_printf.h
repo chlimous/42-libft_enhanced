@@ -6,13 +6,14 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/02/19 14:41:02 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/04/14 17:43:13 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/04/15 22:06:19 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+# include "utils.h"
 # include <stdbool.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -138,8 +139,9 @@ int			formatid_n(va_list args, t_elem elem, t_buffer *buffer);
 int			formatid_o(va_list args, t_elem elem, t_buffer *buffer);
 int			formatid_k(va_list args, t_elem elem, t_buffer *buffer);
 // Handle Unsigned
-int			len_unsigned(uintmax_t nb, char *base);
-int			add_unsigned_nb(uintmax_t nb, char *base, t_buffer *buffer);
+int			len_unsigned(uintmax_t nb, char *base, t_elem elem);
+int			add_unsigned_nb(uintmax_t nb, char *base, t_elem elem, \
+				t_buffer *buffer);
 int			check_prefix_width(uintmax_t nb, t_elem elem);
 int			check_prefix_precision(uintmax_t nb, t_elem elem);
 int			add_prefix(uintmax_t nb, t_elem elem, t_buffer *buffer);
@@ -148,8 +150,9 @@ int			handle_unsigned(uintmax_t nb, char *base, t_elem elem, \
 				t_buffer *buffer);
 // Handle Signed
 intmax_t	handle_length_signed(va_list args, t_elem elem);
-int			len_signed(intmax_t nb, char *base);
-int			add_signed_nb(intmax_t nb, char *base, t_buffer *buffer);
+int			len_signed(intmax_t nb, char *base, t_elem elem);
+int			add_signed_nb(intmax_t nb, char *base, t_elem elem, \
+				t_buffer *buffer);
 int			handle_signed(intmax_t nb, char *base, t_elem elem, \
 				t_buffer *buffer);
 // Utils

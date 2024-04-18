@@ -6,11 +6,11 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/03/15 23:40:13 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/04/13 13:24:46 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/04/15 22:08:18 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Gets length of number
@@ -19,10 +19,12 @@
  * @param base Base
  * @return int Length of number
 ******************************************************************************/
-int	len_unsigned(uintmax_t nb, char *base)
+int	len_unsigned(uintmax_t nb, char *base, t_elem elem)
 {
 	int	len;
 
+	if (nb == 0 && elem.is_dot && elem.precision == 0)
+		return (0);
 	len = 1;
 	while (nb / ft_strlen(base) != 0)
 	{
@@ -40,11 +42,14 @@ int	len_unsigned(uintmax_t nb, char *base)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	add_unsigned_nb(uintmax_t nb, char *base, t_buffer *buffer)
+int	add_unsigned_nb(uintmax_t nb, char *base, t_elem elem, t_buffer *buffer)
 {
+	if (nb == 0 && elem.is_dot && elem.precision == 0)
+		return (EXIT_SUCCESS);
 	if (nb / ft_strlen(base) != 0)
 	{
-		if (add_unsigned_nb(nb / ft_strlen(base), base, buffer) == EXIT_FAILURE)
+		if (add_unsigned_nb(nb / ft_strlen(base), base, elem, buffer) \
+				== EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	if (add_node(buffer, base[nb % ft_strlen(base)]) == EXIT_FAILURE)
