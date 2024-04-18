@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/12/13 13:00:57 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/01/13 01:47:39 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/04/18 21:04:05 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ char	*ft_strncpy(char *dest, char *src, size_t size);
 char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strndup(const char *src, size_t size);
 char	*ft_strdup_cat(const char *str1, const char *str2);
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif
