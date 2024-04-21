@@ -6,11 +6,25 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/12/31 02:02:23 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/01/01 20:23:02 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/04/21 20:03:36 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+size_t	get_line_len(t_advlist *advlst, ssize_t eol_index)
+{
+	ssize_t	len;
+
+	if (advlst->size == 1)
+		len = eol_index + 1;
+	else if (advlst->size == 2)
+		len = ft_strlen(advlst->head->content) + (eol_index + 1);
+	else
+		len = ft_strlen(advlst->head->content) + \
+			((advlst->size - 2) * BUFFER_SIZE) + (eol_index + 1);
+	return (len);
+}
 
 bool	gnl_is_eol(t_list *node)
 {

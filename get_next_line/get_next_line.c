@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/12/29 18:07:22 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/01/01 20:23:50 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/04/21 20:02:28 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -61,20 +61,6 @@ static void	list_to_string(t_advlist *advlst, char **line, ssize_t eol_index)
 	}
 }
 
-static	size_t	get_line_len(t_advlist *advlst, ssize_t eol_index)
-{
-	ssize_t	len;
-
-	if (advlst->size == 1)
-		len = eol_index + 1;
-	else if (advlst->size == 2)
-		len = ft_strlen(advlst->head->content) + (eol_index + 1);
-	else
-		len = ft_strlen(advlst->head->content) + \
-			((advlst->size - 2) * BUFFER_SIZE) + (eol_index + 1);
-	return (len);
-}
-
 static ssize_t	build_line(t_advlist *advlst, char **line)
 {
 	ssize_t	len;
@@ -91,11 +77,10 @@ static ssize_t	build_line(t_advlist *advlst, char **line)
 	return (len);
 }
 
-ssize_t	get_next_line(int fd, char **line)
+static ssize_t	read_line(int fd, t_advlist *advlst)
 {
-	static t_advlist	advlst[FD_MAX + 1];
-	char				*buffer;
-	ssize_t				bytesread;
+	char	*buffer;
+	ssize_t	bytesread;
 
 	bytesread = 1;
 	while (bytesread > 0 && !gnl_is_eol(advlst[fd].tail))
@@ -117,5 +102,18 @@ ssize_t	get_next_line(int fd, char **line)
 		if (!bytesread)
 			free(buffer);
 	}
+	return (1);
+}
+
+ssize_t	get_next_line(int fd, char **line, int flag)
+{
+	static t_advlist	advlst[FD_MAX + 1];
+	ssize_t				res;
+
+	if (flag == GNL_FLUSH)
+		return (ft_advlstclear(&advlst[fd]), 0);
+	res = read_line(fd, advlst);
+	if (res == -1 || res == 0)
+		return (res);
 	return (build_line(&advlst[fd], line));
 }
