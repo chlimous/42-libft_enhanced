@@ -6,7 +6,7 @@
 #    By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	       #
 #						  +#+#+#+#+#+	+#+	       #
 #    Created: 2023/12/13 15:29:55 by chlimous	       #+#    #+#	       #
-#    Updated: 2024/04/21 19:01:27 by chlimous         ###   ########.fr        #
+#    Updated: 2024/04/25 20:03:05 by chlimous         ###   ########.fr        #
 #									       #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS += $(addprefix conv/, ft_atoi.c ft_atof.c ft_itoa.c ft_tolower.c ft_toupper
 SRCS += $(addprefix check/, ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_isspace.c)
 SRCS += $(addprefix string/, ft_split.c ft_strchr.c ft_strcpy.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_strncpy.c ft_strndup.c ft_strdup_cat.c ft_strcmp.c)
 SRCS += $(addprefix tab/, ft_rev_int_tab.c ft_rev_long_tab.c)
+SRCS += $(addprefix maths/, ft_isnan.c)
 
 SRCS += $(addprefix get_next_line/, get_next_line.c get_next_line_utils.c)
 
