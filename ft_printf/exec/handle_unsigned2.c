@@ -10,7 +10,7 @@
 /*									      */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 /******************************************************************************
  * @brief Gets length of number
@@ -19,11 +19,11 @@
  * @param base Base
  * @return int Length of number
 ******************************************************************************/
-int	len_unsigned(uintmax_t nb, char *base, t_elem elem)
+int	len_unsigned(uintmax_t nb, char *base, t_elem *elem)
 {
 	int	len;
 
-	if (nb == 0 && elem.is_dot && elem.precision == 0)
+	if (nb == 0 && elem->is_dot && elem->precision == 0)
 		return (0);
 	len = 1;
 	while (nb / ft_strlen(base) != 0)
@@ -42,9 +42,9 @@ int	len_unsigned(uintmax_t nb, char *base, t_elem elem)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	add_unsigned_nb(uintmax_t nb, char *base, t_elem elem, t_buffer *buffer)
+int	add_unsigned_nb(uintmax_t nb, char *base, t_elem *elem, t_buffer *buffer)
 {
-	if (nb == 0 && elem.is_dot && elem.precision == 0)
+	if (nb == 0 && elem->is_dot && elem->precision == 0)
 		return (EXIT_SUCCESS);
 	if (nb / ft_strlen(base) != 0)
 	{
@@ -64,13 +64,13 @@ int	add_unsigned_nb(uintmax_t nb, char *base, t_elem elem, t_buffer *buffer)
  * @param elem Element
  * @return int Prefix length
 ******************************************************************************/
-int	check_prefix_width(uintmax_t nb, t_elem elem)
+int	check_prefix_width(uintmax_t nb, t_elem *elem)
 {
-	if (elem.is_hash && nb != 0)
+	if (elem->is_hash && nb != 0)
 	{
-		if (elem.formatid == 'o')
+		if (elem->formatid == 'o')
 			return (1);
-		else if (elem.formatid == 'x' || elem.formatid == 'X')
+		else if (elem->formatid == 'x' || elem->formatid == 'X')
 			return (2);
 	}
 	return (0);
@@ -84,9 +84,9 @@ int	check_prefix_width(uintmax_t nb, t_elem elem)
  * @param elem Element
  * @return int Prefix length
 ******************************************************************************/
-int	check_prefix_precision(uintmax_t nb, t_elem elem)
+int	check_prefix_precision(uintmax_t nb, t_elem *elem)
 {
-	if (elem.is_hash && elem.formatid == 'o' && nb != 0)
+	if (elem->is_hash && elem->formatid == 'o' && nb != 0)
 		return (1);
 	return (0);
 }
@@ -99,26 +99,26 @@ int	check_prefix_precision(uintmax_t nb, t_elem elem)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	add_prefix(uintmax_t nb, t_elem elem, t_buffer *buffer)
+int	add_prefix(uintmax_t nb, t_elem *elem, t_buffer *buffer)
 {
-	if (elem.formatid == 'p')
+	if (elem->formatid == 'p')
 	{
 		if (add_nodes(buffer, "0x") == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
-	else if (elem.is_hash && nb != 0)
+	else if (elem->is_hash && nb != 0)
 	{
-		if (elem.formatid == 'x')
+		if (elem->formatid == 'x')
 		{
 			if (add_nodes(buffer, "0x") == EXIT_FAILURE)
 				return (EXIT_FAILURE);
 		}
-		else if (elem.formatid == 'X')
+		else if (elem->formatid == 'X')
 		{
 			if (add_nodes(buffer, "0X") == EXIT_FAILURE)
 				return (EXIT_FAILURE);
 		}
-		else if (elem.formatid == 'o')
+		else if (elem->formatid == 'o')
 		{
 			if (add_node(buffer, '0') == EXIT_FAILURE)
 				return (EXIT_FAILURE);

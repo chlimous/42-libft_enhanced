@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*									      */
 /*							  :::	   ::::::::   */
-/*   formatid_n.c                                       :+:      :+:    :+:   */
+/*   formatid_di.c                                      :+:      :+:    :+:   */
 /*						      +:+ +:+	      +:+     */
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
-/*   Created: 2024/03/10 12:19:09 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/03/16 17:30:56 by chlimous         ###   ########.fr       */
+/*   Created: 2024/02/28 17:16:40 by chlimous	       #+#    #+#	      */
+/*   Updated: 2024/04/27 01:55:38 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -20,30 +20,29 @@
 ******************************************************************************/
 static int	check_undefined(t_elem *elem)
 {
-	if (elem->is_minus || elem->is_zero || elem->is_hash || elem->is_space \
-			|| elem->is_plus || elem->is_dot || elem->width)
+	if (elem->is_hash)
 		return (EXIT_FAILURE);
-	if (elem->length != NO_LEN)
+	if (elem->length == L_UP_LEN)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
 /******************************************************************************
- * @brief Executes 'n' conversion specifier
+ * @brief Executes 'd' / 'i' conversion specifiers and loads buffer
  * 
  * @param args Arguments pointer
  * @param elem Element
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	formatid_n(va_list args, t_elem *elem, t_buffer *buffer)
+int	formatid_di(va_list args, t_elem *elem, t_buffer *buffer)
 {
-	int	*nb;
+	intmax_t	nb;
 
-	(void)elem;
 	if (check_undefined(elem) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	nb = va_arg(args, int *);
-	*nb = buffer->size;
+	nb = handle_length_signed(args, elem);
+	if (handle_signed(nb, BASE_10, elem, buffer) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

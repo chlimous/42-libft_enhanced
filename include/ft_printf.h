@@ -6,27 +6,34 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/02/19 14:41:02 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/04/18 20:27:02 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/04/27 04:06:37 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "utils.h"
 # include <stdbool.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
 # include <stdarg.h>
+# include <math.h>
 # include <sys/param.h>
 # include <stdint.h>
 # include <stddef.h>
 # include <wchar.h>
 
 # define PRINT_ERROR -1
+
 # define NULL_MSG "(null)"
 # define NIL_MSG "(nil)"
+# define INF_LOW_MSG "inf"
+# define INF_UP_MSG "INF"
+# define NAN_LOW_MSG "nan"
+# define NAN_UP_MSG "NAN"
+
+# define DEF_PRCS_FLOAT 6
 
 # define BASE_8 "01234567"
 # define BASE_10 "0123456789"
@@ -58,14 +65,14 @@ typedef enum s_length
 	L_UP_LEN,
 }	t_length;
 
-# define SPECIFIERS "cspdiuxX%nok"
+# define SPECIFIERS "cspdiuxX%fFeEnok"
 
 struct					s_elem;
 typedef struct s_elem	t_elem;
 struct					s_buffer;
 typedef struct s_buffer	t_buffer;
 
-typedef int				(*t_handler)(va_list, t_elem, t_buffer *);
+typedef int				(*t_handler)(va_list, t_elem *, t_buffer *);
 
 struct	s_elem
 {
@@ -126,33 +133,46 @@ const char	*parse_formatid(const char *ptr, t_elem *elem, va_list args);
 const char	*process_width(const char *ptr, uintmax_t *width, va_list args);
 
 /* Execution */
-int			formatid_c(va_list args, t_elem elem, t_buffer *buffer);
-int			formatid_s(va_list args, t_elem elem, t_buffer *buffer);
-int			formatid_p(va_list args, t_elem elem, t_buffer *buffer);
-int			formatid_d(va_list args, t_elem elem, t_buffer *buffer);
-int			formatid_u(va_list args, t_elem elem, t_buffer *buffer);
-int			formatid_x(va_list args, t_elem elem, t_buffer *buffer);
-int			formatid_percent(va_list args, t_elem elem, t_buffer *buffer);
-int			formatid_n(va_list args, t_elem elem, t_buffer *buffer);
-int			formatid_o(va_list args, t_elem elem, t_buffer *buffer);
-int			formatid_k(va_list args, t_elem elem, t_buffer *buffer);
+int			formatid_c(va_list args, t_elem *elem, t_buffer *buffer);
+int			formatid_s(va_list args, t_elem *elem, t_buffer *buffer);
+int			formatid_p(va_list args, t_elem *elem, t_buffer *buffer);
+int			formatid_di(va_list args, t_elem *elem, t_buffer *buffer);
+int			formatid_u(va_list args, t_elem *elem, t_buffer *buffer);
+int			formatid_x(va_list args, t_elem *elem, t_buffer *buffer);
+int			formatid_percent(va_list args, t_elem *elem, t_buffer *buffer);
+int			formatid_fe(va_list args, t_elem *elem, t_buffer *buffer);
+int			formatid_n(va_list args, t_elem *elem, t_buffer *buffer);
+int			formatid_o(va_list args, t_elem *elem, t_buffer *buffer);
+int			formatid_k(va_list args, t_elem *elem, t_buffer *buffer);
 // Handle Unsigned
-int			len_unsigned(uintmax_t nb, char *base, t_elem elem);
-int			add_unsigned_nb(uintmax_t nb, char *base, t_elem elem, \
+int			len_unsigned(uintmax_t nb, char *base, t_elem *elem);
+int			add_unsigned_nb(uintmax_t nb, char *base, t_elem *elem, \
 				t_buffer *buffer);
-int			check_prefix_width(uintmax_t nb, t_elem elem);
-int			check_prefix_precision(uintmax_t nb, t_elem elem);
-int			add_prefix(uintmax_t nb, t_elem elem, t_buffer *buffer);
-uintmax_t	handle_length_unsigned(va_list args, t_elem elem);
-int			handle_unsigned(uintmax_t nb, char *base, t_elem elem, \
+int			check_prefix_width(uintmax_t nb, t_elem *elem);
+int			check_prefix_precision(uintmax_t nb, t_elem *elem);
+int			add_prefix(uintmax_t nb, t_elem *elem, t_buffer *buffer);
+uintmax_t	handle_length_unsigned(va_list args, t_elem *elem);
+int			handle_unsigned(uintmax_t nb, char *base, t_elem *elem, \
 				t_buffer *buffer);
 // Handle Signed
-intmax_t	handle_length_signed(va_list args, t_elem elem);
-int			len_signed(intmax_t nb, char *base, t_elem elem);
-int			add_signed_nb(intmax_t nb, char *base, t_elem elem, \
+intmax_t	handle_length_signed(va_list args, t_elem *elem);
+int			len_signed(intmax_t nb, char *base, t_elem *elem);
+int			add_signed_nb(intmax_t nb, char *base, t_elem *elem, \
 				t_buffer *buffer);
-int			handle_signed(intmax_t nb, char *base, t_elem elem, \
+int			handle_signed(intmax_t nb, char *base, t_elem *elem, \
 				t_buffer *buffer);
+// Handle Float
+int			handle_float(long double nb, t_elem *elem, t_buffer *buffer);
+int			check_sign_float(long double nb, t_elem *elem);
+long double	handle_length_float(va_list args, t_elem *elem);
+int			abs_int(int nb);
+int			len_float(long double nb, t_elem *elem);
+int			add_float_nb(long double nb, t_elem *elem, t_buffer *buffer);
+int			len_float_f(long double nb, t_elem *elem);
+int			add_float_dec(long double nb, t_elem *elem, t_buffer *buffer);
+int			add_float_f(long double nb, t_elem *elem, t_buffer *buffer);
+int			len_float_e(long double nb, t_elem *elem);
+int			add_float_e(long double nb, t_elem *elem, t_buffer *buffer);
 // Utils
 int			fill_width(t_buffer *buffer, int amount, char filler);
 

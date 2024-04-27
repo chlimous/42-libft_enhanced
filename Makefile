@@ -6,7 +6,7 @@
 #    By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	       #
 #						  +#+#+#+#+#+	+#+	       #
 #    Created: 2023/12/13 15:29:55 by chlimous	       #+#    #+#	       #
-#    Updated: 2024/04/25 20:03:05 by chlimous         ###   ########.fr        #
+#    Updated: 2024/04/27 04:07:36 by chlimous         ###   ########.fr        #
 #									       #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCS += $(addprefix get_next_line/, get_next_line.c get_next_line_utils.c)
 SRCS += $(addprefix ft_printf/, ft_printf.c ft_printf2.c)
 SRCS += $(addprefix ft_printf/buffer/, add_back.c add_node.c buffer_to_string.c clear_buffer.c flush.c new_node.c)
 SRCS += $(addprefix ft_printf/parser/, parse_elem.c parse_flags.c set_flags.c parse_width.c parse_precision.c parse_length.c parse_formatid.c utils.c)
-SRCS += $(addprefix ft_printf/exec/, formatid_c.c formatid_s.c formatid_p.c formatid_d.c formatid_u.c formatid_x.c formatid_percent.c formatid_n.c formatid_o.c formatid_k.c utils.c handle_unsigned.c handle_unsigned2.c handle_signed.c handle_signed2.c)
+SRCS += $(addprefix ft_printf/exec/, formatid_c.c formatid_s.c formatid_p.c formatid_di.c formatid_u.c formatid_x.c formatid_percent.c formatid_fe.c formatid_n.c formatid_o.c formatid_k.c utils.c handle_unsigned.c handle_unsigned2.c handle_signed.c handle_signed2.c handle_float.c handle_float2.c handle_float3.c handle_float4.c handle_float5.c)
 
 OBJS = $(SRCS:.c=.o)
 

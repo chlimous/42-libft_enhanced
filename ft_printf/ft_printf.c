@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/02/19 14:40:20 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/04/13 20:19:58 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/04/27 01:53:47 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_print(t_buffer *buffer, const char *format, va_list args)
 			format = parse_elem(format + 1, &elem, args);
 			if (!format)
 				return (clear_buffer(*buffer), EXIT_FAILURE);
-			if (elem.formatid_handler(args, elem, buffer) == EXIT_FAILURE)
+			if (elem.formatid_handler(args, &elem, buffer) == EXIT_FAILURE)
 				return (clear_buffer(*buffer), EXIT_FAILURE);
 		}
 		else

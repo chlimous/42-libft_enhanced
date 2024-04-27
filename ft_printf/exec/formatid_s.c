@@ -19,14 +19,14 @@
  * @param str String to add
  * @return int Number of characters to add
 ******************************************************************************/
-static int	char_to_add(t_elem elem, char *str)
+static int	char_to_add(t_elem *elem, char *str)
 {
 	int		add_size;
 	size_t	len;
 
 	len = ft_strlen(str);
-	if (elem.is_dot && (int)len >= elem.precision)
-		add_size = elem.precision;
+	if (elem->is_dot && (int)len >= elem->precision)
+		add_size = elem->precision;
 	else
 		add_size = len;
 	return (add_size);
@@ -40,7 +40,7 @@ static int	char_to_add(t_elem elem, char *str)
  * @param str String to add
  * @return int Exit status
 ******************************************************************************/
-static int	add_string(t_elem elem, t_buffer *buffer, char *str)
+static int	add_string(t_elem *elem, t_buffer *buffer, char *str)
 {
 	int	add_size;
 	int	i;
@@ -79,11 +79,11 @@ static int	get_arg(va_list args, char **str)
  * @param elem Element
  * @return int Exit status
 ******************************************************************************/
-static int	check_undefined(t_elem elem)
+static int	check_undefined(t_elem *elem)
 {
-	if (elem.is_zero || elem.is_hash || elem.is_space || elem.is_plus)
+	if (elem->is_zero || elem->is_hash || elem->is_space || elem->is_plus)
 		return (EXIT_FAILURE);
-	if (elem.length != NO_LEN)
+	if (elem->length != NO_LEN)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -96,7 +96,7 @@ static int	check_undefined(t_elem elem)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	formatid_s(va_list args, t_elem elem, t_buffer *buffer)
+int	formatid_s(va_list args, t_elem *elem, t_buffer *buffer)
 {
 	char	*str;
 	int		add_size;
@@ -106,16 +106,16 @@ int	formatid_s(va_list args, t_elem elem, t_buffer *buffer)
 	if (get_arg(args, &str) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	add_size = char_to_add(elem, str);
-	if (elem.is_minus)
+	if (elem->is_minus)
 	{
 		if (add_string(elem, buffer, str) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (fill_width(buffer, elem.width - add_size, ' ') == EXIT_FAILURE)
+		if (fill_width(buffer, elem->width - add_size, ' ') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	else
 	{
-		if (fill_width(buffer, elem.width - add_size, ' ') == EXIT_FAILURE)
+		if (fill_width(buffer, elem->width - add_size, ' ') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		if (add_string(elem, buffer, str) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
