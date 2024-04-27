@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 19:01:01 by chlimous          #+#    #+#             */
-/*   Updated: 2024/04/21 20:32:21 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/04/27 18:43:47 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ static int	get_sign(const char **nptr)
 	return (1);
 }
 
-static double	get_value(const char **nptr, double res, double *decimal_factor)
+static double	get_value(const char **nptr, double *decimal_factor)
 {
-	int	is_decimal;
+	double	res;
+	int		is_decimal;
 
+	res = 0.0;
 	is_decimal = 0;
 	while (**nptr)
 	{
@@ -90,12 +92,11 @@ double	ft_atof(const char *nptr)
 	int		sign;
 	double	decimal_factor;
 
-	res = 0.0;
 	decimal_factor = 1.0;
 	while (ft_isspace(*nptr))
 		++nptr;
 	sign = get_sign(&nptr);
-	res = get_value(&nptr, res, &decimal_factor);
+	res = get_value(&nptr, &decimal_factor);
 	res = get_exponent(&nptr, res);
 	return (res / decimal_factor * sign);
 }
