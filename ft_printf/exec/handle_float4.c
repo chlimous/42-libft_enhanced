@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 23:34:55 by chlimous          #+#    #+#             */
-/*   Updated: 2024/04/26 23:34:56 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/04/28 00:23:15 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ static int	len_exponent(long double nb)
 	if (nb == 0.0)
 		return (4);
 	exp = 0;
-	while (nb >= 10.0)
+	while (nb <= -10.0 || nb >= 10.0)
 	{
 		++exp;
 		nb /= 10;
 	}
-	while (nb < 1.0)
+	while ((nb < 0.0 && nb > -1.0) || (nb > 0 && nb < 1.0))
 	{
 		++exp;
 		nb *= 10;
