@@ -6,12 +6,12 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/12/13 13:00:57 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/04/28 01:49:27 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/05/06 00:12:12 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
-#ifndef STRING_H
-# define STRING_H
+#ifndef STR_H
+# define STR_H
 
 # include <stdlib.h>
 # include <unistd.h>

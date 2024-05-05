@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/09/07 00:26:57 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/04/25 20:04:31 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/05/06 00:13:06 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "mem.h"
 # include "conv.h"
 # include "check.h"
-# include "string.h"
+# include "str.h"
 # include "tab.h"
 # include "maths.h"
 # include "get_next_line.h"
