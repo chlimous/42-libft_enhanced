@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/03/15 21:59:11 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/09/08 20:01:53 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/09 01:21:18 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -141,7 +141,8 @@ static int	handle_default(intmax_t nb, char *base, t_pf_elem *elem, \
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	pf_handle_signed(intmax_t nb, char *base, t_pf_elem *elem, t_pf_buffer *buffer)
+int	pf_handle_signed(intmax_t nb, char *base, t_pf_elem *elem, \
+		t_pf_buffer *buffer)
 {
 	if (elem->is_minus)
 	{

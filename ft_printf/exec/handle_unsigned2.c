@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/03/15 23:40:13 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/04/15 22:08:18 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/09 01:20:42 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	pf_len_unsigned(uintmax_t nb, char *base, t_pf_elem *elem)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	pf_add_unsigned_nb(uintmax_t nb, char *base, t_pf_elem *elem, t_pf_buffer *buffer)
+int	pf_add_unsigned_nb(uintmax_t nb, char *base, t_pf_elem *elem, \
+		t_pf_buffer *buffer)
 {
 	if (nb == 0 && elem->is_dot && elem->precision == 0)
 		return (EXIT_SUCCESS);

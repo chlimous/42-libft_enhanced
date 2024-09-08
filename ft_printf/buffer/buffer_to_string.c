@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/03/04 17:19:07 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/04/13 20:21:47 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/09 01:20:04 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 ******************************************************************************/
 void	pf_buffer_to_string(char *str, size_t size, t_pf_buffer buffer)
 {
-	t_pf_node			*current;
-	size_t			i;
+	t_pf_node	*current;
+	size_t		i;
 
 	current = buffer.head;
 	i = 0;

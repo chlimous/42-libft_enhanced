@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/02/19 14:41:02 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/09/08 22:46:50 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/09 01:17:39 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ typedef enum s_pf_length
 
 # define SPECIFIERS "cspdiuxX%fFeEnok"
 
-struct					s_pf_elem;
+struct						s_pf_elem;
 typedef struct s_pf_elem	t_pf_elem;
-struct					s_pf_buffer;
+struct						s_pf_buffer;
 typedef struct s_pf_buffer	t_pf_buffer;
 
-typedef int				(*t_handler)(va_list, t_pf_elem *, t_pf_buffer *);
+typedef int					(*t_handler)(va_list, t_pf_elem *, t_pf_buffer *);
 
 struct	s_pf_elem
 {
@@ -92,18 +92,18 @@ struct	s_pf_elem
 typedef struct s_pf_node
 {
 	char				c;
-	struct s_pf_node		*next;
+	struct s_pf_node	*next;
 }	t_pf_node;
 
 struct s_pf_buffer
 {
 	t_pf_node	*head;
 	t_pf_node	*tail;
-	int		size;
+	int			size;
 };
 
 /* Buffer Management */
-t_pf_node		*pf_new_node(char c);
+t_pf_node	*pf_new_node(char c);
 int			pf_add_node(t_pf_buffer *buffer, char c);
 int			pf_add_nodes(t_pf_buffer *buffer, char *str);
 void		pf_add_back(t_pf_buffer *buffer, t_pf_node *new);
@@ -139,7 +139,8 @@ int			pf_formatid_p(va_list args, t_pf_elem *elem, t_pf_buffer *buffer);
 int			pf_formatid_di(va_list args, t_pf_elem *elem, t_pf_buffer *buffer);
 int			pf_formatid_u(va_list args, t_pf_elem *elem, t_pf_buffer *buffer);
 int			pf_formatid_x(va_list args, t_pf_elem *elem, t_pf_buffer *buffer);
-int			pf_formatid_percent(va_list args, t_pf_elem *elem, t_pf_buffer *buffer);
+int			pf_formatid_percent(va_list args, t_pf_elem *elem, \
+				t_pf_buffer *buffer);
 int			pf_formatid_fe(va_list args, t_pf_elem *elem, t_pf_buffer *buffer);
 int			pf_formatid_n(va_list args, t_pf_elem *elem, t_pf_buffer *buffer);
 int			pf_formatid_o(va_list args, t_pf_elem *elem, t_pf_buffer *buffer);
@@ -162,23 +163,29 @@ int			pf_add_signed_nb(intmax_t nb, char *base, t_pf_elem *elem, \
 int			pf_handle_signed(intmax_t nb, char *base, t_pf_elem *elem, \
 				t_pf_buffer *buffer);
 // Handle Float
-int			pf_handle_float(long double nb, t_pf_elem *elem, t_pf_buffer *buffer);
+int			pf_handle_float(long double nb, t_pf_elem *elem, \
+				t_pf_buffer *buffer);
 int			pf_check_sign_float(long double nb, t_pf_elem *elem);
 long double	pf_handle_length_float(va_list args, t_pf_elem *elem);
 int			pf_abs_int(int nb);
 int			pf_len_float(long double nb, t_pf_elem *elem);
-int			pf_add_float_nb(long double nb, t_pf_elem *elem, t_pf_buffer *buffer);
+int			pf_add_float_nb(long double nb, t_pf_elem *elem, \
+				t_pf_buffer *buffer);
 int			pf_len_float_f(long double nb, t_pf_elem *elem);
-int			pf_add_float_dec(long double nb, t_pf_elem *elem, t_pf_buffer *buffer);
-int			pf_add_float_f(long double nb, t_pf_elem *elem, t_pf_buffer *buffer);
+int			pf_add_float_dec(long double nb, t_pf_elem *elem, \
+				t_pf_buffer *buffer);
+int			pf_add_float_f(long double nb, t_pf_elem *elem, \
+				t_pf_buffer *buffer);
 int			pf_len_float_e(long double nb, t_pf_elem *elem);
-int			pf_add_float_e(long double nb, t_pf_elem *elem, t_pf_buffer *buffer);
+int			pf_add_float_e(long double nb, t_pf_elem *elem, \
+				t_pf_buffer *buffer);
 // Utils
 int			pf_fill_width(t_pf_buffer *buffer, int amount, char filler);
 
 /* Print */
 // Buffer loader
-int			pf_load_buffer(t_pf_buffer *buffer, const char *format, va_list args);
+int			pf_load_buffer(t_pf_buffer *buffer, const char *format, \
+				va_list args);
 // Print functions
 int			ft_printf(const char *format, ...);
 int			ft_dprintf(int fd, const char *format, ...);

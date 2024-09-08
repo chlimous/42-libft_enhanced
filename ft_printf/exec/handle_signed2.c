@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/03/15 23:55:59 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/04/27 02:36:50 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/09 01:20:30 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int	pf_len_signed(intmax_t nb, char *base, t_pf_elem *elem)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	pf_add_signed_nb(intmax_t nb, char *base, t_pf_elem *elem, t_pf_buffer *buffer)
+int	pf_add_signed_nb(intmax_t nb, char *base, t_pf_elem *elem, \
+		t_pf_buffer *buffer)
 {
 	uintmax_t	tmp;
 
