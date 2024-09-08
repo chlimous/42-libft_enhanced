@@ -5,17 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/31 04:43:23 by chlimous          #+#    #+#             */
-/*   Updated: 2024/04/21 20:02:46 by chlimous         ###   ########.fr       */
+/*   Created: 2024/05/01 20:50:18 by chlimous          #+#    #+#             */
+/*   Updated: 2024/05/01 20:50:23 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include "list.h"
-# include <stdlib.h>
 # include <unistd.h>
+# include <stdlib.h>
 # include <stdbool.h>
 
 # ifndef BUFFER_SIZE
@@ -28,10 +27,31 @@
 
 # define GNL_FLUSH -1
 
-ssize_t		get_next_line(int fd, char **line, int flag);
-size_t		get_line_len(t_advlist *advlst, ssize_t eol_index);
-bool		gnl_is_eol(t_list *node);
-size_t		gnl_get_eol_index(t_list *node);
-void		gnl_clear_lst_but_last(t_advlist *advlst);
+typedef struct s_gnl_node
+{
+	char				*content;
+	ssize_t				size;
+	struct s_gnl_node	*next;
+}	t_gnl_node;
+
+typedef struct s_gnl_buffer
+{
+	t_gnl_node	*head;
+	t_gnl_node	*tail;
+	size_t		size;
+}	t_gnl_buffer;
+
+/* Buffer */
+int		gnl_add_node(t_gnl_buffer *buffer, char *content);
+void	gnl_partial_clear_buffer(t_gnl_buffer *buffer);
+void	gnl_clear_buffer(t_gnl_buffer *buffer);
+
+/* Utils */
+bool	gnl_is_eol(t_gnl_node *node);
+ssize_t	gnl_eol_index(t_gnl_node *node);
+void	gnl_cpy(char *dest, const char *src, ssize_t size);
+
+/* get_next_line */
+size_t	get_next_line(int fd, char **line, int flag);
 
 #endif

@@ -6,44 +6,11 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/02/19 14:40:20 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/04/27 01:53:47 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/05/31 02:20:45 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-/******************************************************************************
- * @brief Parses format string and arguments and loads the buffer
- * 
- * @param buffer Buffer pointer
- * @param format Format string
- * @param args Arguments pointer
- * @return int Exit status
-******************************************************************************/
-int	ft_print(t_buffer *buffer, const char *format, va_list args)
-{
-	t_elem		elem;
-
-	ft_bzero(buffer, sizeof(t_buffer));
-	while (*format)
-	{
-		if (*format == '%')
-		{
-			format = parse_elem(format + 1, &elem, args);
-			if (!format)
-				return (clear_buffer(*buffer), EXIT_FAILURE);
-			if (elem.formatid_handler(args, &elem, buffer) == EXIT_FAILURE)
-				return (clear_buffer(*buffer), EXIT_FAILURE);
-		}
-		else
-		{
-			if (add_node(buffer, *format) == EXIT_FAILURE)
-				return (clear_buffer(*buffer), EXIT_FAILURE);
-			++format;
-		}
-	}
-	return (EXIT_SUCCESS);
-}
 
 /******************************************************************************
  * @brief Writes output to stdout
@@ -73,14 +40,14 @@ int	ft_printf(const char *format, ...)
 ******************************************************************************/
 int	ft_vdprintf(int fd, const char *format, va_list args)
 {
-	t_buffer	buffer;
+	t_pf_buffer	buffer;
 
 	if (!format)
-		return (PRINT_ERROR);
-	if (ft_print(&buffer, format, args) == EXIT_FAILURE)
-		return (PRINT_ERROR);
-	if (flush(buffer, fd) == EXIT_FAILURE)
-		return (PRINT_ERROR);
+		return (PRINTF_ERROR);
+	if (pf_load_buffer(&buffer, format, args) == EXIT_FAILURE)
+		return (PRINTF_ERROR);
+	if (pf_flush(buffer, fd) == EXIT_FAILURE)
+		return (PRINTF_ERROR);
 	return (buffer.size);
 }
 

@@ -18,7 +18,7 @@
  * @param elem Element
  * @return int Exit status
 ******************************************************************************/
-static int	check_undefined(t_elem *elem)
+static int	check_undefined(t_pf_elem *elem)
 {
 	if (elem->is_hash)
 		return (EXIT_FAILURE);
@@ -35,14 +35,14 @@ static int	check_undefined(t_elem *elem)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	formatid_di(va_list args, t_elem *elem, t_buffer *buffer)
+int	pf_formatid_di(va_list args, t_pf_elem *elem, t_pf_buffer *buffer)
 {
 	intmax_t	nb;
 
 	if (check_undefined(elem) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	nb = handle_length_signed(args, elem);
-	if (handle_signed(nb, BASE_10, elem, buffer) == EXIT_FAILURE)
+	nb = pf_handle_length_signed(args, elem);
+	if (pf_handle_signed(nb, BASE_10, elem, buffer) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

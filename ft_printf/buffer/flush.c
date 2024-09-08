@@ -19,7 +19,7 @@
  * @param fd Destination file descriptor
  * @return int Exit status
 ******************************************************************************/
-int	flush(t_buffer buffer, int fd)
+int	pf_flush(t_pf_buffer buffer, int fd)
 {
 	char	*tmp;
 
@@ -27,8 +27,8 @@ int	flush(t_buffer buffer, int fd)
 		return (write(fd, "", 0));
 	tmp = malloc(sizeof(char) * (buffer.size + 1));
 	if (!tmp)
-		return (clear_buffer(buffer), EXIT_FAILURE);
-	buffer_to_string(tmp, (size_t)INT_MAX + 1, buffer);
+		return (pf_clear_buffer(buffer), EXIT_FAILURE);
+	pf_buffer_to_string(tmp, (size_t)INT_MAX + 1, buffer);
 	if (write(fd, tmp, buffer.size) != buffer.size)
 		return (free(tmp), EXIT_FAILURE);
 	return (free(tmp), EXIT_SUCCESS);

@@ -19,9 +19,9 @@
  * @param size Maximum number of bytes to add to the string, '\0' included
  * @param buffer Buffer
 ******************************************************************************/
-void	buffer_to_string(char *str, size_t size, t_buffer buffer)
+void	pf_buffer_to_string(char *str, size_t size, t_pf_buffer buffer)
 {
-	t_node			*current;
+	t_pf_node			*current;
 	size_t			i;
 
 	current = buffer.head;
@@ -33,5 +33,5 @@ void	buffer_to_string(char *str, size_t size, t_buffer buffer)
 		current = current->next;
 	}
 	str[i] = '\0';
-	clear_buffer(buffer);
+	pf_clear_buffer(buffer);
 }

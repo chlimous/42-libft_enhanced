@@ -21,13 +21,13 @@
  * @return const char* Format string pointer after format specifier, or NULL in
 	case of error
 ******************************************************************************/
-const char	*parse_formatid(const char *ptr, t_elem *elem, va_list args)
+const char	*pf_parse_formatid(const char *ptr, t_pf_elem *elem, va_list args)
 {
-	const t_handler	handler[] = {formatid_c, formatid_s, formatid_p, \
-			formatid_di, formatid_di, formatid_u, formatid_x, \
-			formatid_x, formatid_percent, formatid_fe, \
-			formatid_fe, formatid_fe, formatid_fe, formatid_n, \
-			formatid_o, formatid_k, 0};
+	const t_handler	handler[] = {pf_formatid_c, pf_formatid_s, pf_formatid_p, \
+			pf_formatid_di, pf_formatid_di, pf_formatid_u, pf_formatid_x, \
+			pf_formatid_x, pf_formatid_percent, pf_formatid_fe, \
+			pf_formatid_fe, pf_formatid_fe, pf_formatid_fe, pf_formatid_k, \
+			pf_formatid_o, pf_formatid_k, 0};
 	unsigned int	i;
 
 	(void)args;

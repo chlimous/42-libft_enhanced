@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/04/13 18:54:05 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/04/14 14:41:34 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/05/31 02:21:56 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ int	ft_vsprintf(char *str, const char *format, va_list args)
 ******************************************************************************/
 int	ft_vsnprintf(char *str, size_t size, const char *format, va_list args)
 {
-	t_buffer	buffer;
+	t_pf_buffer	buffer;
 
 	if (!format)
-		return (PRINT_ERROR);
-	if (ft_print(&buffer, format, args) == EXIT_FAILURE)
-		return (PRINT_ERROR);
-	buffer_to_string(str, size, buffer);
+		return (PRINTF_ERROR);
+	if (pf_load_buffer(&buffer, format, args) == EXIT_FAILURE)
+		return (PRINTF_ERROR);
+	pf_buffer_to_string(str, size, buffer);
 	return (buffer.size);
 }

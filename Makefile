@@ -6,14 +6,13 @@
 #    By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	       #
 #						  +#+#+#+#+#+	+#+	       #
 #    Created: 2023/12/13 15:29:55 by chlimous	       #+#    #+#	       #
-#    Updated: 2024/05/06 00:13:41 by chlimous         ###   ########.fr        #
+#    Updated: 2024/09/08 22:46:34 by chlimous         ###   ########.fr        #
 #									       #
 # **************************************************************************** #
 
 NAME = libft.a
 
 SRCS += $(addprefix list/, ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c)
-SRCS += $(addprefix list/advlist/, ft_advlst_init.c ft_advlstadd_back.c ft_advlstadd_front.c ft_advlstclear.c)
 SRCS += $(addprefix print/, ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c)
 SRCS += $(addprefix mem/, ft_bzero.c ft_calloc.c ft_free_pp.c ft_memccpy.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c)
 SRCS += $(addprefix conv/, ft_atoi.c ft_atof.c ft_itoa.c ft_tolower.c ft_toupper.c ft_ascii_to_nb.c)
@@ -22,7 +21,7 @@ SRCS += $(addprefix str/, ft_split.c ft_strchr.c ft_strcpy.c ft_strdup.c ft_stri
 SRCS += $(addprefix tab/, ft_rev_int_tab.c ft_rev_long_tab.c)
 SRCS += $(addprefix maths/, ft_isnan.c)
 
-SRCS += $(addprefix get_next_line/, get_next_line.c get_next_line_utils.c)
+SRCS += $(addprefix get_next_line/, get_next_line.c get_next_line_utils.c buffer.c)
 
 SRCS += $(addprefix ft_printf/, ft_printf.c ft_printf2.c)
 SRCS += $(addprefix ft_printf/buffer/, add_back.c add_node.c buffer_to_string.c clear_buffer.c flush.c new_node.c)
@@ -39,8 +38,11 @@ CFLAGS = -Wall -Wextra -Werror
 
 MAKEFLAGS += --no-print-directory
 
-.c.o:
-	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
+#.c.o:
+#	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
+
+%.o: %.c $(INCLUDE)
+	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $(<:.c=.o)
 
 $(NAME) : $(OBJS)
 	ar rcs $(NAME) $(OBJS)

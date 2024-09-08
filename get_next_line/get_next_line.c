@@ -1,119 +1,124 @@
 /* ************************************************************************** */
-/*									      */
-/*							  :::	   ::::::::   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
-/*						      +:+ +:+	      +:+     */
-/*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
-/*						  +#+#+#+#+#+	+#+	      */
-/*   Created: 2023/12/29 18:07:22 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/04/21 20:02:28 by chlimous         ###   ########.fr       */
-/*									      */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/01 20:35:18 by chlimous          #+#    #+#             */
+/*   Updated: 2024/05/01 20:45:55 by chlimous         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	trim_static(t_advlist *advlst, ssize_t eol_index)
+static int	trim_buffer(t_gnl_buffer *buffer, ssize_t eol_index)
 {
 	char	*content;
 	ssize_t	len;
 
-	gnl_clear_lst_but_last(advlst);
-	len = ft_strlen(advlst->head->content) - eol_index - 1;
+	gnl_partial_clear_buffer(buffer);
+	len = buffer->head->size - eol_index - 1;
 	if (len > 0)
 	{
-		content = malloc(sizeof(char) * (len + 1));
+		content = malloc(sizeof(char) * len);
 		if (!content)
-			return (1);
-		ft_strncpy(content, advlst->head->content + eol_index + 1, len + 1);
-		free(advlst->head->content);
-		advlst->head->content = content;
+			return (EXIT_FAILURE);
+		gnl_cpy(content, buffer->head->content + eol_index + 1, len);
+		free(buffer->head->content);
+		buffer->head->content = content;
+		buffer->head->size = len;
 	}
 	else
-		ft_advlstclear(advlst);
-	return (0);
+		gnl_clear_buffer(buffer);
+	return (EXIT_SUCCESS);
 }
 
-static void	list_to_string(t_advlist *advlst, char **line, ssize_t eol_index)
+static size_t	line_len(t_gnl_buffer *buffer, ssize_t eol_index)
 {
-	ssize_t	len;
-	t_list	*current;
-	size_t	i;
+	size_t	size;
 
-	i = 0;
-	len = 0;
-	current = advlst->head;
-	while (current)
+	size = eol_index + 1;
+	if (buffer->size >= 2)
+		size += buffer->head->size;
+	if (buffer->size > 2)
+		size += (buffer->size - 2) * BUFFER_SIZE;
+	return (size);
+}
+
+static void	buffer_to_string(t_gnl_buffer buffer, char *line, \
+		ssize_t eol_index)
+{
+	size_t		node_i;
+	size_t		line_i;
+
+	line_i = 0;
+	node_i = 0;
+	while (buffer.head)
 	{
-		if (i + 1 == advlst->size)
-			ft_strlcpy(*line + len, current->content, eol_index + 2);
-		else if (i == 0)
+		if (node_i == buffer.size - 1)
 		{
-			ft_strncpy(*line, current->content, ft_strlen(current->content));
-			len += ft_strlen(current->content);
+			gnl_cpy(line + line_i, buffer.head->content, eol_index + 1);
+			line[line_i + (eol_index + 1)] = '\0';
+		}
+		else if (node_i == 0)
+		{
+			gnl_cpy(line, buffer.head->content, buffer.head->size);
+			line_i += buffer.head->size;
 		}
 		else
 		{
-			ft_strncpy(*line + len, current->content, BUFFER_SIZE);
-			len += BUFFER_SIZE;
+			gnl_cpy(line + line_i, buffer.head->content, BUFFER_SIZE);
+			line_i += BUFFER_SIZE;
 		}
-		i++;
-		current = current->next;
+		++node_i;
+		buffer.head = buffer.head->next;
 	}
 }
 
-static ssize_t	build_line(t_advlist *advlst, char **line)
+static size_t	get_line(t_gnl_buffer *buffer, char **line)
 {
-	ssize_t	len;
+	size_t	len;
 	ssize_t	eol_index;
 
-	eol_index = gnl_get_eol_index(advlst->tail);
-	len = get_line_len(advlst, eol_index);
+	if (buffer->size == 0)
+		return (0);
+	eol_index = gnl_eol_index(buffer->tail);
+	len = line_len(buffer, eol_index);
 	*line = malloc(sizeof(char) * (len + 1));
-	if (!line)
-		return (ft_advlstclear(advlst), -1);
-	list_to_string(advlst, line, eol_index);
-	if (trim_static(advlst, eol_index))
-		return (ft_advlstclear(advlst), free(*line), -1);
+	if (!*line)
+		return (gnl_clear_buffer(buffer), -1);
+	buffer_to_string(*buffer, *line, eol_index);
+	if (trim_buffer(buffer, eol_index) == EXIT_FAILURE)
+		return (free(*line), gnl_clear_buffer(buffer), -1);
 	return (len);
 }
 
-static ssize_t	read_line(int fd, t_advlist *advlst)
+size_t	get_next_line(int fd, char **line, int flag)
 {
-	char	*buffer;
-	ssize_t	bytesread;
-
-	bytesread = 1;
-	while (bytesread > 0 && !gnl_is_eol(advlst[fd].tail))
-	{
-		buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-		if (!buffer)
-			return (ft_advlstclear(&advlst[fd]), -1);
-		bytesread = read(fd, buffer, BUFFER_SIZE);
-		if (bytesread == -1)
-			return (ft_advlstclear(&advlst[fd]), free(buffer), -1);
-		if (bytesread > 0)
-		{
-			buffer[bytesread] = '\0';
-			if (ft_advlstadd_back(&advlst[fd], ft_lstnew(buffer)))
-				return (ft_advlstclear(&advlst[fd]), free(buffer), -1);
-		}
-		if (!advlst[fd].size)
-			return (free(buffer), 0);
-		if (!bytesread)
-			free(buffer);
-	}
-	return (1);
-}
-
-ssize_t	get_next_line(int fd, char **line, int flag)
-{
-	static t_advlist	advlst[FD_MAX + 1];
-	ssize_t				res;
+	static t_gnl_buffer	buffer[FD_MAX + 1];
+	ssize_t				bytesread;
+	char				*content;
 
 	if (flag == GNL_FLUSH)
-		return (ft_advlstclear(&advlst[fd]), 0);
-	res = read_line(fd, advlst);
-	if (res == -1 || res == 0)
-		return (res);
-	return (build_line(&advlst[fd], line));
+		return (gnl_clear_buffer(&buffer[fd]), 0);
+	bytesread = 1;
+	while (bytesread > 0 && !gnl_is_eol(buffer[fd].tail))
+	{
+		content = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		if (!content)
+			return (gnl_clear_buffer(&buffer[fd]), -1);
+		bytesread = read(fd, content, BUFFER_SIZE);
+		if (bytesread == -1)
+			return (free(content), gnl_clear_buffer(&buffer[fd]), -1);
+		else if (bytesread == 0)
+			free(content);
+		else if (bytesread > 0)
+		{
+			if (gnl_add_node(&buffer[fd], content) == EXIT_FAILURE)
+				return (free(content), gnl_clear_buffer(&buffer[fd]), -1);
+			buffer[fd].tail->size = bytesread;
+		}
+	}
+	return (get_line(&buffer[fd], line));
 }

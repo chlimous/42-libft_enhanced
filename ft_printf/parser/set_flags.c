@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-const char	*set_minus(const char *ptr, t_elem *elem)
+const char	*pf_set_minus(const char *ptr, t_pf_elem *elem)
 {
 	if (elem->is_minus)
 		return (NULL);
@@ -20,7 +20,7 @@ const char	*set_minus(const char *ptr, t_elem *elem)
 	return (ptr + 1);
 }
 
-const char	*set_plus(const char *ptr, t_elem *elem)
+const char	*pf_set_plus(const char *ptr, t_pf_elem *elem)
 {
 	if (elem->is_plus)
 		return (NULL);
@@ -28,7 +28,7 @@ const char	*set_plus(const char *ptr, t_elem *elem)
 	return (ptr + 1);
 }
 
-const char	*set_space(const char *ptr, t_elem *elem)
+const char	*pf_set_space(const char *ptr, t_pf_elem *elem)
 {
 	if (elem->is_space)
 		return (NULL);
@@ -36,7 +36,7 @@ const char	*set_space(const char *ptr, t_elem *elem)
 	return (ptr + 1);
 }
 
-const char	*set_hash(const char *ptr, t_elem *elem)
+const char	*pf_set_hash(const char *ptr, t_pf_elem *elem)
 {
 	if (elem->is_hash)
 		return (NULL);
@@ -44,7 +44,7 @@ const char	*set_hash(const char *ptr, t_elem *elem)
 	return (ptr + 1);
 }
 
-const char	*set_zero(const char *ptr, t_elem *elem)
+const char	*pf_set_zero(const char *ptr, t_pf_elem *elem)
 {
 	if (elem->is_zero)
 		return (NULL);

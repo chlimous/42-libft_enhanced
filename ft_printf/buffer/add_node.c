@@ -19,16 +19,16 @@
  * @param c Character that goes in the new node
  * @return int Exit status
 ******************************************************************************/
-int	add_node(t_buffer *buffer, char c)
+int	pf_add_node(t_pf_buffer *buffer, char c)
 {
-	t_node	*new;
+	t_pf_node	*new;
 
 	if (buffer->size == INT_MAX)
 		return (EXIT_FAILURE);
-	new = new_node(c);
+	new = pf_new_node(c);
 	if (!new)
 		return (EXIT_FAILURE);
-	add_back(buffer, new);
+	pf_add_back(buffer, new);
 	return (EXIT_SUCCESS);
 }
 
@@ -39,11 +39,11 @@ int	add_node(t_buffer *buffer, char c)
  * @param str String to add
  * @return int Exit status
 ******************************************************************************/
-int	add_nodes(t_buffer *buffer, char *str)
+int	pf_add_nodes(t_pf_buffer *buffer, char *str)
 {
 	while (*str)
 	{
-		if (add_node(buffer, *str) == EXIT_FAILURE)
+		if (pf_add_node(buffer, *str) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		++str;
 	}

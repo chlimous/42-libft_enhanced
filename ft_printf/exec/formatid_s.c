@@ -19,7 +19,7 @@
  * @param str String to add
  * @return int Number of characters to add
 ******************************************************************************/
-static int	char_to_add(t_elem *elem, char *str)
+static int	char_to_add(t_pf_elem *elem, char *str)
 {
 	int		add_size;
 	size_t	len;
@@ -40,7 +40,7 @@ static int	char_to_add(t_elem *elem, char *str)
  * @param str String to add
  * @return int Exit status
 ******************************************************************************/
-static int	add_string(t_elem *elem, t_buffer *buffer, char *str)
+static int	add_string(t_pf_elem *elem, t_pf_buffer *buffer, char *str)
 {
 	int	add_size;
 	int	i;
@@ -49,7 +49,7 @@ static int	add_string(t_elem *elem, t_buffer *buffer, char *str)
 	i = 0;
 	while (str[i] && i < add_size)
 	{
-		if (add_node(buffer, str[i]) == EXIT_FAILURE)
+		if (pf_add_node(buffer, str[i]) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		++i;
 	}
@@ -79,7 +79,7 @@ static int	get_arg(va_list args, char **str)
  * @param elem Element
  * @return int Exit status
 ******************************************************************************/
-static int	check_undefined(t_elem *elem)
+static int	check_undefined(t_pf_elem *elem)
 {
 	if (elem->is_zero || elem->is_hash || elem->is_space || elem->is_plus)
 		return (EXIT_FAILURE);
@@ -96,7 +96,7 @@ static int	check_undefined(t_elem *elem)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	formatid_s(va_list args, t_elem *elem, t_buffer *buffer)
+int	pf_formatid_s(va_list args, t_pf_elem *elem, t_pf_buffer *buffer)
 {
 	char	*str;
 	int		add_size;
@@ -110,12 +110,12 @@ int	formatid_s(va_list args, t_elem *elem, t_buffer *buffer)
 	{
 		if (add_string(elem, buffer, str) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (fill_width(buffer, elem->width - add_size, ' ') == EXIT_FAILURE)
+		if (pf_fill_width(buffer, elem->width - add_size, ' ') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	else
 	{
-		if (fill_width(buffer, elem->width - add_size, ' ') == EXIT_FAILURE)
+		if (pf_fill_width(buffer, elem->width - add_size, ' ') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		if (add_string(elem, buffer, str) == EXIT_FAILURE)
 			return (EXIT_FAILURE);

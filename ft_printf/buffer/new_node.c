@@ -16,13 +16,13 @@
  * @brief Makes a new node
  * 
  * @param c Character that goes in the new node
- * @return t_node* New node
+ * @return t_pf_node* New node
 ******************************************************************************/
-t_node	*new_node(char c)
+t_pf_node	*pf_new_node(char c)
 {
-	t_node	*new;
+	t_pf_node	*new;
 
-	new = malloc(sizeof(t_node));
+	new = malloc(sizeof(t_pf_node));
 	if (!new)
 		return (NULL);
 	new->c = c;

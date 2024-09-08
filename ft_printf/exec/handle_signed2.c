@@ -19,7 +19,7 @@
  * @param elem Element
  * @return intmax_t Argument integer
 ******************************************************************************/
-intmax_t	handle_length_signed(va_list args, t_elem *elem)
+intmax_t	pf_handle_length_signed(va_list args, t_pf_elem *elem)
 {
 	if (elem->length == HH_LOW_LEN)
 		return ((signed char)va_arg(args, int));
@@ -46,7 +46,7 @@ intmax_t	handle_length_signed(va_list args, t_elem *elem)
  * @param base Base
  * @return int Length of number
 ******************************************************************************/
-int	len_signed(intmax_t nb, char *base, t_elem *elem)
+int	pf_len_signed(intmax_t nb, char *base, t_pf_elem *elem)
 {
 	int			len;
 	uintmax_t	tmp;
@@ -76,7 +76,7 @@ int	len_signed(intmax_t nb, char *base, t_elem *elem)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	add_signed_nb(intmax_t nb, char *base, t_elem *elem, t_buffer *buffer)
+int	pf_add_signed_nb(intmax_t nb, char *base, t_pf_elem *elem, t_pf_buffer *buffer)
 {
 	uintmax_t	tmp;
 
@@ -90,11 +90,11 @@ int	add_signed_nb(intmax_t nb, char *base, t_elem *elem, t_buffer *buffer)
 		tmp = nb;
 	if (tmp / ft_strlen(base) != 0)
 	{
-		if (add_signed_nb((intmax_t)(tmp / ft_strlen(base)), base, elem, \
+		if (pf_add_signed_nb((intmax_t)(tmp / ft_strlen(base)), base, elem, \
 					buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
-	if (add_node(buffer, base[tmp % ft_strlen(base)]) == EXIT_FAILURE)
+	if (pf_add_node(buffer, base[tmp % ft_strlen(base)]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

@@ -42,7 +42,7 @@ static bool	is_length(const char *ptr, const char *length)
  * @param args Arguments pointer
  * @return const char* Format string pointer after length
 ******************************************************************************/
-const char	*parse_length(const char *ptr, t_elem *elem, va_list args)
+const char	*pf_parse_length(const char *ptr, t_pf_elem *elem, va_list args)
 {
 	const char		*length[] = {LENGTH_0, LENGTH_1, LENGTH_2, \
 		LENGTH_3, LENGTH_4, LENGTH_5, LENGTH_6, LENGTH_7, LENGTH_8, 0};
