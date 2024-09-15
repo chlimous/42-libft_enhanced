@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/09/07 00:26:57 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/09/15 04:31:07 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 04:44:26 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ char	*ft_strchr(const char *s, int c);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strdup(const char *src);
-char	*ft_strdup_cat(const char *str1, const char *str2);
 void	ft_striteri(char *s, void (*f)(size_t, char *));
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
@@ -113,6 +112,5 @@ size_t	ft_wcslen(const wchar_t *str);
 
 // tab
 void	ft_rev_int_tab(int *tab, size_t size);
-void	ft_rev_long_tab(long *tab, size_t size);
 
 #endif
