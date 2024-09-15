@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/09/07 00:26:57 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/09/15 04:44:26 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 19:45:01 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int		ft_tolower(int c);
 int		ft_toupper(int c);
 
 // printf
-int		t_printf(const char *format, ...);
+int		ft_printf(const char *format, ...);
 int		ft_dprintf(int fd, const char *format, ...);
-int		t_vprintf(const char *format, va_list args);
+int		ft_vprintf(const char *format, va_list args);
 int		ft_vdprintf(int fd, const char *format, va_list args);
 int		ft_sprintf(char *str, const char *format, ...);
 int		ft_snprintf(char *str, size_t size, const char *format, ...);
