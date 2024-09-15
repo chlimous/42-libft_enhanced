@@ -6,21 +6,22 @@
 /*   By: chlimous <marvin@42.fr>		    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/08/15 21:47:56 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/01/04 18:36:09 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 02:16:41 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-static bool	is_sep(char c, char const *sep_charset)
+static int	is_sep(char c, char const *sep_charset)
 {
 	while (*sep_charset)
 	{
 		if (c == *sep_charset)
-			return (true);
-		sep_charset++;
+			return (1);
+		++sep_charset;
 	}
-	return (false);
+	return (0);
 }
 
 static int	word_size(char const *str, char const *sep_charset)
@@ -29,7 +30,7 @@ static int	word_size(char const *str, char const *sep_charset)
 
 	i = 0;
 	while (str[i] && !is_sep(str[i], sep_charset))
-		i++;
+		++i;
 	return (i);
 }
 
@@ -42,11 +43,11 @@ static int	count_words(char const *str, char const *sep_charset)
 	{
 		if (*str && !is_sep(*str, sep_charset))
 		{
-			words++;
+			++words;
 			str += word_size(str, sep_charset);
 		}
 		while (*str && is_sep(*str, sep_charset))
-			str++;
+			++str;
 	}
 	return (words);
 }
@@ -60,7 +61,7 @@ static void	free_matrix(char **strs, size_t size)
 	{
 		free(strs[i]);
 		strs[i] = NULL;
-		i++;
+		++i;
 	}
 	free(strs);
 	strs = NULL;
@@ -86,10 +87,10 @@ char	**ft_split(char const *str, char const *sep_charset)
 				return (NULL);
 			}
 			str += word_size(str, sep_charset);
-			i++;
+			++i;
 		}
 		while (*str && is_sep(*str, sep_charset))
-			str++;
+			++str;
 	}
 	strs[i] = 0;
 	return (strs);

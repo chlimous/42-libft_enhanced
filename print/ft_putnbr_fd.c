@@ -6,11 +6,12 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 16:11:34 by chlimous          #+#    #+#             */
-/*   Updated: 2024/01/13 02:02:57 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 03:12:33 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 ssize_t	ft_putnbr_fd(int n, int fd)
 {

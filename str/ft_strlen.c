@@ -6,11 +6,11 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/09/07 00:35:06 by chlimous	       #+#    #+#	      */
-/*   Updated: 2023/12/18 16:07:44 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 02:39:27 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stddef.h>
 
 size_t	ft_strlen(const char *str)
 {
@@ -18,6 +18,6 @@ size_t	ft_strlen(const char *str)
 
 	i = 0;
 	while (str[i])
-		i++;
+		++i;
 	return (i);
 }

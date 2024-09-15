@@ -6,11 +6,12 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 16:11:25 by chlimous          #+#    #+#             */
-/*   Updated: 2024/01/13 01:54:17 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 01:50:09 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 ssize_t	ft_putendl_fd(char *str, int fd)
 {

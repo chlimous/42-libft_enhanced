@@ -10,7 +10,7 @@
 /*									      */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Fill buffer with specific characters, for width/precision management
@@ -20,11 +20,11 @@
  * @param filler Character used as filler
  * @return int Exit status
 ******************************************************************************/
-int	pf_fill_width(t_pf_buffer *buffer, int amount, char filler)
+int	fill_width(t_buffer *buffer, int amount, char filler)
 {
 	while (amount > 0)
 	{
-		if (pf_add_node(buffer, filler) == EXIT_FAILURE)
+		if (add_node(buffer, filler) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		--amount;
 	}

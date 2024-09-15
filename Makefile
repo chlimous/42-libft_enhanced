@@ -6,7 +6,7 @@
 #    By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	       #
 #						  +#+#+#+#+#+	+#+	       #
 #    Created: 2023/12/13 15:29:55 by chlimous	       #+#    #+#	       #
-#    Updated: 2024/09/09 00:35:40 by chlimous         ###   ########.fr        #
+#    Updated: 2024/09/15 04:28:14 by chlimous         ###   ########.fr        #
 #									       #
 # **************************************************************************** #
 
@@ -32,17 +32,16 @@ OBJS = $(SRCS:.c=.o)
 
 INCLUDE = include
 
+INCLUDES = -I $(INCLUDE) -I ft_printf/include -I get_next_line/include 
+
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
 MAKEFLAGS += --no-print-directory
 
-#.c.o:
-#	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $@
-
-%.o: %.c $(INCLUDE)
-	$(CC) $(CFLAGS) -I $(INCLUDE) -c $< -o $(<:.c=.o)
+%.o: %.c $(INCLUDE) ft_printf/include get_next_line/include
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $(<:.c=.o)
 
 $(NAME) : $(OBJS)
 	ar rcs $(NAME) $(OBJS)

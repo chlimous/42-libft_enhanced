@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Get the exponent and normalize the number to scientific notation
@@ -45,14 +45,14 @@ static int	get_exponent(long double *nb)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-static int	add_exponent_digits(int exp, t_pf_buffer *buffer)
+static int	add_exponent_digits(int exp, t_buffer *buffer)
 {
 	if (exp / 10 != 0)
 	{
 		if (add_exponent_digits(exp / 10, buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
-	if (pf_add_node(buffer, BASE_10[pf_abs_int(exp) % 10]) == EXIT_FAILURE)
+	if (add_node(buffer, BASE_10[abs_int(exp) % 10]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -65,28 +65,28 @@ static int	add_exponent_digits(int exp, t_pf_buffer *buffer)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-static int	add_exponent_part(int exp, t_pf_elem *elem, t_pf_buffer *buffer)
+static int	add_exponent_part(int exp, t_elem *elem, t_buffer *buffer)
 {
 	if (elem->formatid == 'e')
 	{
-		if (pf_add_node(buffer, 'e') == EXIT_FAILURE)
+		if (add_node(buffer, 'e') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	else if (elem->formatid == 'E')
 	{
-		if (pf_add_node(buffer, 'E') == EXIT_FAILURE)
+		if (add_node(buffer, 'E') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	if (exp < 0)
 	{
-		if (pf_add_node(buffer, '-') == EXIT_FAILURE)
+		if (add_node(buffer, '-') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	else
-		if (pf_add_node(buffer, '+') == EXIT_FAILURE)
+		if (add_node(buffer, '+') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	if ((exp < 0 && exp > -10) || (exp >= 0 && exp < 10))
-		if (pf_add_node(buffer, '0') == EXIT_FAILURE)
+		if (add_node(buffer, '0') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	if (add_exponent_digits(exp, buffer) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
@@ -101,19 +101,19 @@ static int	add_exponent_part(int exp, t_pf_elem *elem, t_pf_buffer *buffer)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	pf_add_float_e(long double nb, t_pf_elem *elem, t_pf_buffer *buffer)
+int	add_float_e(long double nb, t_elem *elem, t_buffer *buffer)
 {
 	int	exp;
 
 	exp = get_exponent(&nb);
-	if (pf_add_node(buffer, BASE_10[pf_abs_int((int)nb)]) == EXIT_FAILURE)
+	if (add_node(buffer, BASE_10[abs_int((int)nb)]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	nb -= (int)nb;
 	if (!(elem->is_dot && elem->precision == 0 && !elem->is_hash))
 	{
-		if (pf_add_node(buffer, '.') == EXIT_FAILURE)
+		if (add_node(buffer, '.') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (pf_add_float_dec(nb, elem, buffer) == EXIT_FAILURE)
+		if (add_float_dec(nb, elem, buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	if (add_exponent_part(exp, elem, buffer) == EXIT_FAILURE)

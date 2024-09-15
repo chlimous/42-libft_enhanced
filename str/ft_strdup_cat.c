@@ -6,11 +6,12 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 01:17:55 by chlimous          #+#    #+#             */
-/*   Updated: 2024/01/13 01:48:57 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 02:23:17 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 char	*ft_strdup_cat(const char *str1, const char *str2)
 {

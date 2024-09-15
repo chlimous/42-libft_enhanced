@@ -6,11 +6,12 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/10/25 00:18:30 by chlimous	       #+#    #+#	      */
-/*   Updated: 2023/11/21 20:19:07 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 02:44:06 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stddef.h>
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
@@ -29,9 +30,9 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 		{
 			if (j == size - 1)
 				return ((char *)(big + i));
-			j++;
+			++j;
 		}
-		i++;
+		++i;
 	}
 	return (NULL);
 }

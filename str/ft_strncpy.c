@@ -6,11 +6,11 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 04:41:08 by chlimous          #+#    #+#             */
-/*   Updated: 2023/12/31 04:41:10 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 02:41:54 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stddef.h>
 
 char	*ft_strncpy(char *dest, char *src, size_t size)
 {
@@ -20,12 +20,12 @@ char	*ft_strncpy(char *dest, char *src, size_t size)
 	while (i < size && src[i] != '\0')
 	{
 		dest[i] = src[i];
-		i++;
+		++i;
 	}
 	while (i < size)
 	{
 		dest[i] = '\0';
-		i++;
+		++i;
 	}
 	return (dest);
 }

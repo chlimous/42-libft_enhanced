@@ -6,25 +6,25 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 19:29:46 by chlimous          #+#    #+#             */
-/*   Updated: 2023/11/21 23:20:16 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 04:32:20 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
 
-static unsigned int	size_alloc(ssize_t n)
+static int	size_alloc(ssize_t n)
 {
-	unsigned int	size;
+	int	size;
 
 	size = 2;
 	if (n < 0)
 	{
-		size++;
+		++size;
 		n = -n;
 	}
 	while (n / 10 != 0)
 	{
-		size++;
+		++size;
 		n /= 10;
 	}
 	return (size);
@@ -32,10 +32,10 @@ static unsigned int	size_alloc(ssize_t n)
 
 char	*ft_itoa(int n)
 {
-	unsigned int	size;
-	unsigned int	i;
-	char			*res;
-	ssize_t			ntemp;
+	int		size;
+	int		i;
+	char	*res;
+	ssize_t	ntemp;
 
 	ntemp = n;
 	size = size_alloc(ntemp);
@@ -53,7 +53,7 @@ char	*ft_itoa(int n)
 	{
 		res[i] = ntemp % 10 + 48;
 		ntemp /= 10;
-		i--;
+		--i;
 	}
 	res[i] = ntemp % 10 + 48;
 	return (res);

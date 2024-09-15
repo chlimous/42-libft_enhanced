@@ -6,11 +6,12 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 20:15:09 by chlimous          #+#    #+#             */
-/*   Updated: 2024/01/02 20:26:26 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 01:33:36 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 void	ft_free_pp(void **pp)
 {
@@ -20,7 +21,7 @@ void	ft_free_pp(void **pp)
 	while (pp[i])
 	{
 		free(pp[i]);
-		i++;
+		++i;
 	}
 	free(pp);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Gets length of integer part
@@ -50,7 +50,7 @@ static int	len_float_int(long double nb)
  * @param elem Element
  * @return int Length
 ******************************************************************************/
-int	pf_len_float_f(long double nb, t_pf_elem *elem)
+int	len_float_f(long double nb, t_elem *elem)
 {
 	uintmax_t	len;
 
@@ -65,7 +65,7 @@ int	pf_len_float_f(long double nb, t_pf_elem *elem)
 			len += 1;
 	}
 	if (len < INT_MAX || (len == INT_MAX && \
-				pf_check_sign_float(nb, elem) == 0))
+				check_sign_float(nb, elem) == 0))
 		return ((int)len);
 	else
 		return (-1);
@@ -78,7 +78,7 @@ int	pf_len_float_f(long double nb, t_pf_elem *elem)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-static int	add_float_int(long double *nb, t_pf_buffer *buffer)
+static int	add_float_int(long double *nb, t_buffer *buffer)
 {
 	long double	multiplier;
 	long double	tmp;
@@ -94,7 +94,7 @@ static int	add_float_int(long double *nb, t_pf_buffer *buffer)
 	while (multiplier >= 1.0)
 	{
 		digit = (int)(*nb / multiplier);
-		if (pf_add_node(buffer, BASE_10[pf_abs_int(digit)]) == EXIT_FAILURE)
+		if (add_node(buffer, BASE_10[abs_int(digit)]) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		*nb -= digit * multiplier;
 		multiplier /= 10;
@@ -110,7 +110,7 @@ static int	add_float_int(long double *nb, t_pf_buffer *buffer)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	pf_add_float_dec(long double nb, t_pf_elem *elem, t_pf_buffer *buffer)
+int	add_float_dec(long double nb, t_elem *elem, t_buffer *buffer)
 {
 	int	precision;
 	int	digit;
@@ -123,7 +123,7 @@ int	pf_add_float_dec(long double nb, t_pf_elem *elem, t_pf_buffer *buffer)
 	{
 		nb *= 10;
 		digit = (int)nb;
-		if (pf_add_node(buffer, BASE_10[pf_abs_int(digit)]) == EXIT_FAILURE)
+		if (add_node(buffer, BASE_10[abs_int(digit)]) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		nb -= digit;
 		--precision;
@@ -139,15 +139,15 @@ int	pf_add_float_dec(long double nb, t_pf_elem *elem, t_pf_buffer *buffer)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	pf_add_float_f(long double nb, t_pf_elem *elem, t_pf_buffer *buffer)
+int	add_float_f(long double nb, t_elem *elem, t_buffer *buffer)
 {
 	if (add_float_int(&nb, buffer) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (!(elem->is_dot && elem->precision == 0 && !elem->is_hash))
 	{
-		if (pf_add_node(buffer, '.') == EXIT_FAILURE)
+		if (add_node(buffer, '.') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (pf_add_float_dec(nb, elem, buffer) == EXIT_FAILURE)
+		if (add_float_dec(nb, elem, buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

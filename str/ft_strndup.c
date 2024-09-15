@@ -6,11 +6,12 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:58:46 by chlimous          #+#    #+#             */
-/*   Updated: 2024/01/04 18:09:39 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 02:42:13 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 char	*ft_strndup(const char *src, size_t size)
 {
@@ -26,7 +27,7 @@ char	*ft_strndup(const char *src, size_t size)
 	while (src[i] && i < size)
 	{
 		dest[i] = src[i];
-		i++;
+		++i;
 	}
 	dest[i] = '\0';
 	return (dest);

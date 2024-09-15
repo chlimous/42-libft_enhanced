@@ -6,11 +6,11 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/03/15 21:54:31 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/09/09 01:20:58 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/04/27 02:43:22 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Manages argument length
@@ -19,7 +19,7 @@
  * @param elem Element
  * @return uintmax_t Argument integer
 ******************************************************************************/
-uintmax_t	pf_handle_length_unsigned(va_list args, t_pf_elem *elem)
+uintmax_t	handle_length_unsigned(va_list args, t_elem *elem)
 {
 	if (elem->length == HH_LOW_LEN)
 		return ((unsigned char)va_arg(args, int));
@@ -48,27 +48,27 @@ uintmax_t	pf_handle_length_unsigned(va_list args, t_pf_elem *elem)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-static int	handle_minus(uintmax_t nb, char *base, t_pf_elem *elem, \
-		t_pf_buffer *buffer)
+static int	handle_minus(uintmax_t nb, char *base, t_elem *elem, \
+		t_buffer *buffer)
 {
 	int	prefix_len_precision;
 	int	prefix_len_width;
 
-	prefix_len_precision = pf_check_prefix_precision(nb, elem);
-	prefix_len_width = pf_check_prefix_width(nb, elem);
-	if (pf_add_prefix(nb, elem, buffer) == EXIT_FAILURE)
+	prefix_len_precision = check_prefix_precision(nb, elem);
+	prefix_len_width = check_prefix_width(nb, elem);
+	if (add_prefix(nb, elem, buffer) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (elem->is_dot)
 	{
-		if (pf_fill_width(buffer, elem->precision - (pf_len_unsigned(nb, \
+		if (fill_width(buffer, elem->precision - (len_unsigned(nb, \
 		base, elem) + prefix_len_precision), '0') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
-	if (pf_add_unsigned_nb(nb, base, elem, buffer) == EXIT_FAILURE)
+	if (add_unsigned_nb(nb, base, elem, buffer) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (pf_fill_width(buffer, elem->width - MAX(elem->precision \
-	- pf_check_prefix_precision(nb, elem) + prefix_len_width, \
-	pf_len_unsigned(nb, base, elem) + prefix_len_width), ' ') == EXIT_FAILURE)
+	if (fill_width(buffer, elem->width - MAX(elem->precision \
+		- check_prefix_precision(nb, elem) + prefix_len_width, \
+		len_unsigned(nb, base, elem) + prefix_len_width), ' ') == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -82,31 +82,31 @@ static int	handle_minus(uintmax_t nb, char *base, t_pf_elem *elem, \
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-static int	handle_default(uintmax_t nb, char *base, t_pf_elem *elem, \
-		t_pf_buffer *buffer)
+static int	handle_default(uintmax_t nb, char *base, t_elem *elem, \
+		t_buffer *buffer)
 {
 	if (elem->is_zero && !elem->is_dot && base[0] == '0')
 	{
-		if (pf_add_prefix(nb, elem, buffer) == EXIT_FAILURE)
+		if (add_prefix(nb, elem, buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (pf_fill_width(buffer, elem->width - (pf_len_unsigned(nb, base, \
-				elem) + pf_check_prefix_width(nb, elem)), '0') == EXIT_FAILURE)
+		if (fill_width(buffer, elem->width - (len_unsigned(nb, base, elem) + \
+			check_prefix_width(nb, elem)), '0') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	else
 	{
-		if (pf_fill_width(buffer, elem->width - MAX(elem->precision \
-			- pf_check_prefix_precision(nb, elem) + \
-			pf_check_prefix_width(nb, elem), pf_len_unsigned(nb, base, elem) \
-			+ pf_check_prefix_width(nb, elem)), ' ') == EXIT_FAILURE)
+		if (fill_width(buffer, elem->width - MAX(elem->precision \
+			- check_prefix_precision(nb, elem) + \
+			check_prefix_width(nb, elem), len_unsigned(nb, base, elem) \
+			+ check_prefix_width(nb, elem)), ' ') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (pf_add_prefix(nb, elem, buffer) == EXIT_FAILURE)
+		if (add_prefix(nb, elem, buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
-	if (pf_fill_width(buffer, elem->precision - (pf_len_unsigned(nb, base, \
-			elem) + pf_check_prefix_precision(nb, elem)), '0') == EXIT_FAILURE)
+	if (fill_width(buffer, elem->precision - (len_unsigned(nb, base, elem) + \
+		check_prefix_precision(nb, elem)), '0') == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (pf_add_unsigned_nb(nb, base, elem, buffer) == EXIT_FAILURE)
+	if (add_unsigned_nb(nb, base, elem, buffer) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -120,8 +120,7 @@ static int	handle_default(uintmax_t nb, char *base, t_pf_elem *elem, \
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	pf_handle_unsigned(uintmax_t nb, char *base, t_pf_elem *elem, \
-		t_pf_buffer *buffer)
+int	handle_unsigned(uintmax_t nb, char *base, t_elem *elem, t_buffer *buffer)
 {
 	if (elem->is_minus)
 	{

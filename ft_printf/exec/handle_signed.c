@@ -6,11 +6,11 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/03/15 21:59:11 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/09/09 01:21:18 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/04/27 02:43:50 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Checks if number has a sign
@@ -19,7 +19,7 @@
  * @param elem Element
  * @return int 1 if sign, 0 if no sign
 ******************************************************************************/
-static int	check_sign(intmax_t nb, t_pf_elem *elem)
+static int	check_sign(intmax_t nb, t_elem *elem)
 {
 	if (nb < 0)
 		return (1);
@@ -39,23 +39,23 @@ static int	check_sign(intmax_t nb, t_pf_elem *elem)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-static int	add_sign(intmax_t nb, t_pf_elem *elem, t_pf_buffer *buffer)
+static int	add_sign(intmax_t nb, t_elem *elem, t_buffer *buffer)
 {
 	if (nb < 0)
 	{
-		if (pf_add_node(buffer, '-') == EXIT_FAILURE)
+		if (add_node(buffer, '-') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	else
 	{
 		if (elem->is_plus)
 		{
-			if (pf_add_node(buffer, '+') == EXIT_FAILURE)
+			if (add_node(buffer, '+') == EXIT_FAILURE)
 				return (EXIT_FAILURE);
 		}
 		else if (elem->is_space)
 		{
-			if (pf_add_node(buffer, ' ') == EXIT_FAILURE)
+			if (add_node(buffer, ' ') == EXIT_FAILURE)
 				return (EXIT_FAILURE);
 		}
 	}
@@ -71,8 +71,8 @@ static int	add_sign(intmax_t nb, t_pf_elem *elem, t_pf_buffer *buffer)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-static int	handle_minus(intmax_t nb, char *base, t_pf_elem *elem, \
-		t_pf_buffer *buffer)
+static int	handle_minus(intmax_t nb, char *base, t_elem *elem, \
+		t_buffer *buffer)
 {
 	int	sign_len;
 
@@ -81,14 +81,14 @@ static int	handle_minus(intmax_t nb, char *base, t_pf_elem *elem, \
 		return (EXIT_FAILURE);
 	if (elem->is_dot)
 	{
-		if (pf_fill_width(buffer, elem->precision - \
-				pf_len_signed(nb, base, elem), '0') == EXIT_FAILURE)
+		if (fill_width(buffer, elem->precision - \
+				len_signed(nb, base, elem), '0') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
-	if (pf_add_signed_nb(nb, base, elem, buffer) == EXIT_FAILURE)
+	if (add_signed_nb(nb, base, elem, buffer) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (pf_fill_width(buffer, elem->width - MAX(elem->precision + sign_len, \
-			pf_len_signed(nb, base, elem) + sign_len), ' ') == EXIT_FAILURE)
+	if (fill_width(buffer, elem->width - MAX(elem->precision + sign_len, \
+			len_signed(nb, base, elem) + sign_len), ' ') == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -102,8 +102,8 @@ static int	handle_minus(intmax_t nb, char *base, t_pf_elem *elem, \
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-static int	handle_default(intmax_t nb, char *base, t_pf_elem *elem, \
-		t_pf_buffer *buffer)
+static int	handle_default(intmax_t nb, char *base, t_elem *elem, \
+		t_buffer *buffer)
 {
 	int	sign_len;
 
@@ -112,22 +112,22 @@ static int	handle_default(intmax_t nb, char *base, t_pf_elem *elem, \
 	{
 		if (add_sign(nb, elem, buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (pf_fill_width(buffer, elem->width - (pf_len_signed(nb, base, \
-							elem) + sign_len), '0') == EXIT_FAILURE)
+		if (fill_width(buffer, elem->width - (len_signed(nb, base, elem) + \
+						sign_len), '0') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	else
 	{
-		if (pf_fill_width(buffer, elem->width - MAX(elem->precision + sign_len, \
-				pf_len_signed(nb, base, elem) + sign_len), ' ') == EXIT_FAILURE)
+		if (fill_width(buffer, elem->width - MAX(elem->precision + \
+		sign_len, len_signed(nb, base, elem) + sign_len), ' ') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		if (add_sign(nb, elem, buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
-	if (pf_fill_width(buffer, elem->precision - pf_len_signed(nb, base, elem), \
+	if (fill_width(buffer, elem->precision - len_signed(nb, base, elem), \
 				'0') == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (pf_add_signed_nb(nb, base, elem, buffer) == EXIT_FAILURE)
+	if (add_signed_nb(nb, base, elem, buffer) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -141,8 +141,7 @@ static int	handle_default(intmax_t nb, char *base, t_pf_elem *elem, \
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	pf_handle_signed(intmax_t nb, char *base, t_pf_elem *elem, \
-		t_pf_buffer *buffer)
+int	handle_signed(intmax_t nb, char *base, t_elem *elem, t_buffer *buffer)
 {
 	if (elem->is_minus)
 	{

@@ -10,7 +10,7 @@
 /*									      */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Parses format string and arguments and loads the buffer
@@ -20,25 +20,25 @@
  * @param args Arguments pointer
  * @return int Exit status
 ******************************************************************************/
-int	pf_load_buffer(t_pf_buffer *buffer, const char *format, va_list args)
+int	load_buffer(t_buffer *buffer, const char *format, va_list args)
 {
-	t_pf_elem		elem;
+	t_elem		elem;
 
-	ft_bzero(buffer, sizeof(t_pf_buffer));
+	ft_bzero(buffer, sizeof(t_buffer));
 	while (*format)
 	{
 		if (*format == '%')
 		{
-			format = pf_parse_elem(format + 1, &elem, args);
+			format = parse_elem(format + 1, &elem, args);
 			if (!format)
-				return (pf_clear_buffer(*buffer), EXIT_FAILURE);
+				return (clear_buffer(*buffer), EXIT_FAILURE);
 			if (elem.formatid_handler(args, &elem, buffer) == EXIT_FAILURE)
-				return (pf_clear_buffer(*buffer), EXIT_FAILURE);
+				return (clear_buffer(*buffer), EXIT_FAILURE);
 		}
 		else
 		{
-			if (pf_add_node(buffer, *format) == EXIT_FAILURE)
-				return (pf_clear_buffer(*buffer), EXIT_FAILURE);
+			if (add_node(buffer, *format) == EXIT_FAILURE)
+				return (clear_buffer(*buffer), EXIT_FAILURE);
 			++format;
 		}
 	}

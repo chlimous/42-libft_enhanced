@@ -6,11 +6,12 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:04:10 by chlimous          #+#    #+#             */
-/*   Updated: 2024/01/05 23:52:54 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 02:47:19 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 static int	is_set_char(const char c, char const *set)
 {
@@ -18,7 +19,7 @@ static int	is_set_char(const char c, char const *set)
 	{
 		if (c == *set)
 			return (1);
-		set++;
+		++set;
 	}
 	return (0);
 }
@@ -29,7 +30,7 @@ static int	is_right_part(char const *s1, char const *set)
 	{
 		if (!is_set_char(*s1, set))
 			return (0);
-		s1++;
+		++s1;
 	}
 	return (1);
 }
@@ -41,14 +42,14 @@ static size_t	res_str_size(char const *s1, char const *set)
 
 	i = 0;
 	while (s1[i] && is_set_char(s1[i], set))
-		i++;
+		++i;
 	trimmed = i;
 	while (s1[i] && !is_right_part(s1 + i, set))
-		i++;
+		++i;
 	while (s1[i])
 	{
-		trimmed++;
-		i++;
+		++trimmed;
+		++i;
 	}
 	return (ft_strlen(s1) - trimmed);
 }
@@ -63,12 +64,12 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (NULL);
 	i = 0;
 	while (*s1 && is_set_char(*s1, set))
-		s1++;
+		++s1;
 	while (*s1 && !is_right_part(s1, set))
 	{
 		str[i] = *s1;
-		s1++;
-		i++;
+		++s1;
+		++i;
 	}
 	str[i] = '\0';
 	return (str);

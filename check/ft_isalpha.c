@@ -6,11 +6,9 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 22:44:31 by chlimous          #+#    #+#             */
-/*   Updated: 2024/02/28 01:21:18 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/14 22:27:06 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 int	ft_isalpha(int c)
 {

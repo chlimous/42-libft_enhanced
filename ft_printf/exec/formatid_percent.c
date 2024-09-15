@@ -10,7 +10,7 @@
 /*									      */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Checks for undefined specifications
@@ -18,7 +18,7 @@
  * @param elem Element
  * @return int Exit status
 ******************************************************************************/
-static int	check_undefined(t_pf_elem *elem)
+static int	check_undefined(t_elem *elem)
 {
 	if (elem->is_minus || elem->is_zero || elem->is_hash || elem->is_space \
 			|| elem->is_plus || elem->is_dot || elem->width)
@@ -36,13 +36,13 @@ static int	check_undefined(t_pf_elem *elem)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	pf_formatid_percent(va_list args, t_pf_elem *elem, t_pf_buffer *buffer)
+int	formatid_percent(va_list args, t_elem *elem, t_buffer *buffer)
 {
 	(void)args;
 	(void)elem;
 	if (check_undefined(elem) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (pf_add_node(buffer, '%') == EXIT_FAILURE)
+	if (add_node(buffer, '%') == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

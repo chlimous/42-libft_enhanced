@@ -6,11 +6,11 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/04/28 01:47:47 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/04/28 01:48:01 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 02:51:27 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
 
 size_t	ft_wcslen(const wchar_t *str)
 {

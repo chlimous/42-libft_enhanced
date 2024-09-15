@@ -6,11 +6,12 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 22:04:21 by chlimous          #+#    #+#             */
-/*   Updated: 2023/12/13 19:05:43 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 03:05:45 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stddef.h>
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {

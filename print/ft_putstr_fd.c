@@ -6,11 +6,12 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 16:11:41 by chlimous          #+#    #+#             */
-/*   Updated: 2024/01/13 02:01:18 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 01:52:05 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <unistd.h>
 
 ssize_t	ft_putstr_fd(char *str, int fd)
 {

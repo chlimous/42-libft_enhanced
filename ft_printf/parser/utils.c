@@ -10,7 +10,7 @@
 /*									      */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Parses and converts width/precision to integer
@@ -21,7 +21,7 @@
  * @return const char* Format string pointer after width/precision or NULL in
 	case of error
 ******************************************************************************/
-const char	*pf_process_width(const char *ptr, uintmax_t *width, va_list args)
+const char	*process_width(const char *ptr, uintmax_t *width, va_list args)
 {
 	if (*ptr == '*')
 	{

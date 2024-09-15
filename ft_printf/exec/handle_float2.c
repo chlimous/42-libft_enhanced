@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Manages argument length
@@ -19,7 +19,7 @@
  * @param elem Element
  * @return intmax_t Argument integer
 ******************************************************************************/
-long double	pf_handle_length_float(va_list args, t_pf_elem *elem)
+long double	handle_length_float(va_list args, t_elem *elem)
 {
 	if (elem->length == L_UP_LEN)
 		return (va_arg(args, long double));
@@ -35,28 +35,28 @@ long double	pf_handle_length_float(va_list args, t_pf_elem *elem)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-static int	add_nan_inf(long double nb, t_pf_elem *elem, t_pf_buffer *buffer)
+static int	add_nan_inf(long double nb, t_elem *elem, t_buffer *buffer)
 {
 	if (ft_isnan(nb) && (elem->formatid == 'f' || elem->formatid == 'e'))
 	{
-		if (pf_add_nodes(buffer, NAN_LOW_MSG) == EXIT_FAILURE)
+		if (add_nodes(buffer, NAN_LOW_MSG) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	else if (ft_isnan(nb) && (elem->formatid == 'F' || elem->formatid == 'E'))
 	{
-		if (pf_add_nodes(buffer, NAN_UP_MSG) == EXIT_FAILURE)
+		if (add_nodes(buffer, NAN_UP_MSG) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	else if ((nb == INFINITY || nb == -INFINITY) \
 			&& (elem->formatid == 'f' || elem->formatid == 'e'))
 	{
-		if (pf_add_nodes(buffer, INF_LOW_MSG) == EXIT_FAILURE)
+		if (add_nodes(buffer, INF_LOW_MSG) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	else if ((nb == INFINITY || nb == -INFINITY) \
 			&& (elem->formatid == 'F' || elem->formatid == 'E'))
 	{
-		if (pf_add_nodes(buffer, INF_UP_MSG) == EXIT_FAILURE)
+		if (add_nodes(buffer, INF_UP_MSG) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
@@ -70,7 +70,7 @@ static int	add_nan_inf(long double nb, t_pf_elem *elem, t_pf_buffer *buffer)
  * @param nb Number
  * @return int Absolute value
 ******************************************************************************/
-int	pf_abs_int(int nb)
+int	abs_int(int nb)
 {
 	if (nb < 0)
 		return (-nb);
@@ -84,14 +84,14 @@ int	pf_abs_int(int nb)
  * @param elem Element
  * @return int Length of number
 ******************************************************************************/
-int	pf_len_float(long double nb, t_pf_elem *elem)
+int	len_float(long double nb, t_elem *elem)
 {
 	if (ft_isnan(nb) || nb == INFINITY || nb == -INFINITY)
 		return (3);
 	if (elem->formatid == 'f' || elem->formatid == 'F')
-		return (pf_len_float_f(nb, elem));
+		return (len_float_f(nb, elem));
 	else if (elem->formatid == 'e' || elem->formatid == 'E')
-		return (pf_len_float_e(nb, elem));
+		return (len_float_e(nb, elem));
 	return (0);
 }
 
@@ -103,7 +103,7 @@ int	pf_len_float(long double nb, t_pf_elem *elem)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	pf_add_float_nb(long double nb, t_pf_elem *elem, t_pf_buffer *buffer)
+int	add_float_nb(long double nb, t_elem *elem, t_buffer *buffer)
 {
 	if (ft_isnan(nb) || nb == INFINITY || nb == -INFINITY)
 	{
@@ -114,12 +114,12 @@ int	pf_add_float_nb(long double nb, t_pf_elem *elem, t_pf_buffer *buffer)
 	}
 	if (elem->formatid == 'f' || elem->formatid == 'F')
 	{
-		if (pf_add_float_f(nb, elem, buffer) == EXIT_FAILURE)
+		if (add_float_f(nb, elem, buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	else if (elem->formatid == 'e' || elem->formatid == 'E')
 	{
-		if (pf_add_float_e(nb, elem, buffer) == EXIT_FAILURE)
+		if (add_float_e(nb, elem, buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

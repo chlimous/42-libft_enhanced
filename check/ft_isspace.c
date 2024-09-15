@@ -6,11 +6,9 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 01:19:47 by chlimous          #+#    #+#             */
-/*   Updated: 2024/02/28 01:49:04 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/14 22:27:23 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 int	ft_isspace(int c)
 {

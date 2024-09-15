@@ -6,11 +6,11 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 01:06:10 by chlimous          #+#    #+#             */
-/*   Updated: 2024/01/06 00:14:21 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 02:03:19 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stddef.h>
 
 void	ft_rev_long_tab(long *tab, size_t size)
 {
@@ -23,6 +23,6 @@ void	ft_rev_long_tab(long *tab, size_t size)
 		temp = tab[i];
 		tab[i] = tab[size - i - 1];
 		tab[size - i - 1] = temp;
-		i++;
+		++i;
 	}
 }

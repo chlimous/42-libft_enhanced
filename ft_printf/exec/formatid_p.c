@@ -10,7 +10,7 @@
 /*									      */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Executes conversion for '-' flag
@@ -20,23 +20,23 @@
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-static int	handle_minus(uintptr_t adr, t_pf_elem *elem, t_pf_buffer *buffer)
+static int	handle_minus(uintptr_t adr, t_elem *elem, t_buffer *buffer)
 {
 	if (adr)
 	{
-		if (pf_add_nodes(buffer, "0x") == EXIT_FAILURE)
+		if (add_nodes(buffer, "0x") == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (pf_add_unsigned_nb(adr, BASE_16_LOW, elem, buffer) == EXIT_FAILURE)
+		if (add_unsigned_nb(adr, BASE_16_LOW, elem, buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (pf_fill_width(buffer, elem->width - (pf_len_unsigned(adr, \
+		if (fill_width(buffer, elem->width - (len_unsigned(adr, \
 					BASE_16_LOW, elem) + 2), ' ') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	else
 	{
-		if (pf_add_nodes(buffer, NIL_MSG) == EXIT_FAILURE)
+		if (add_nodes(buffer, NIL_MSG) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (pf_fill_width(buffer, elem->width - \
+		if (fill_width(buffer, elem->width - \
 					ft_strlen(NIL_MSG), ' ') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
@@ -51,24 +51,24 @@ static int	handle_minus(uintptr_t adr, t_pf_elem *elem, t_pf_buffer *buffer)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-static int	handle_default(uintptr_t adr, t_pf_elem *elem, t_pf_buffer *buffer)
+static int	handle_default(uintptr_t adr, t_elem *elem, t_buffer *buffer)
 {
 	if (adr)
 	{
-		if (pf_fill_width(buffer, elem->width - (pf_len_unsigned(adr, \
+		if (fill_width(buffer, elem->width - (len_unsigned(adr, \
 					BASE_16_LOW, elem) + 2), ' ') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (pf_add_nodes(buffer, "0x") == EXIT_FAILURE)
+		if (add_nodes(buffer, "0x") == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (pf_add_unsigned_nb(adr, BASE_16_LOW, elem, buffer) == EXIT_FAILURE)
+		if (add_unsigned_nb(adr, BASE_16_LOW, elem, buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	else
 	{
-		if (pf_fill_width(buffer, elem->width - \
+		if (fill_width(buffer, elem->width - \
 				ft_strlen(NIL_MSG), ' ') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (pf_add_nodes(buffer, NIL_MSG) == EXIT_FAILURE)
+		if (add_nodes(buffer, NIL_MSG) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
@@ -80,7 +80,7 @@ static int	handle_default(uintptr_t adr, t_pf_elem *elem, t_pf_buffer *buffer)
  * @param elem Element
  * @return int Exit status
 ******************************************************************************/
-static int	check_undefined(t_pf_elem *elem)
+static int	check_undefined(t_elem *elem)
 {
 	if (elem->is_zero || elem->is_hash || elem->is_space || elem->is_plus \
 			|| elem->is_dot)
@@ -98,7 +98,7 @@ static int	check_undefined(t_pf_elem *elem)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	pf_formatid_p(va_list args, t_pf_elem *elem, t_pf_buffer *buffer)
+int	formatid_p(va_list args, t_elem *elem, t_buffer *buffer)
 {
 	uintptr_t	adr;
 

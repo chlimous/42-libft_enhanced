@@ -10,7 +10,7 @@
 /*									      */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Adds node at the end of the buffer
@@ -18,7 +18,7 @@
  * @param buffer Buffer pointer
  * @param new New node
 ******************************************************************************/
-void	pf_add_back(t_pf_buffer *buffer, t_pf_node *new)
+void	add_back(t_buffer *buffer, t_node *new)
 {
 	if (buffer->size)
 	{

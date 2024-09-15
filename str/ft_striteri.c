@@ -6,11 +6,11 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 21:00:21 by chlimous          #+#    #+#             */
-/*   Updated: 2024/01/07 21:36:41 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 02:24:18 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stddef.h>
 
 void	ft_striteri(char *s, void (*f)(size_t, char *))
 {
@@ -20,6 +20,6 @@ void	ft_striteri(char *s, void (*f)(size_t, char *))
 	while (s[i])
 	{
 		(*f)(i, s + i);
-		i++;
+		++i;
 	}
 }

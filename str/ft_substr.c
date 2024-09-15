@@ -6,11 +6,12 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 22:17:49 by chlimous          #+#    #+#             */
-/*   Updated: 2024/01/07 21:38:36 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 02:47:47 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 static size_t	substr_size(char const *s, size_t start, size_t len)
 {

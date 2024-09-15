@@ -10,17 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Frees the buffer
  * 
  * @param buffer Buffer
 ******************************************************************************/
-void	pf_clear_buffer(t_pf_buffer buffer)
+void	clear_buffer(t_buffer buffer)
 {
-	t_pf_node	*current;
-	t_pf_node	*tmp;
+	t_node	*current;
+	t_node	*tmp;
 
 	current = buffer.head;
 	while (current)

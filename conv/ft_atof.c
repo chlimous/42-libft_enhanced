@@ -6,11 +6,13 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 19:01:01 by chlimous          #+#    #+#             */
-/*   Updated: 2024/04/27 18:43:47 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 03:13:30 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <limits.h>
+#include <math.h>
 
 static int	get_sign(const char **nptr)
 {

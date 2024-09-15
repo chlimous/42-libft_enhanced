@@ -10,9 +10,9 @@
 /*									      */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-static const char	*process_dot(const char *ptr, t_pf_elem *elem)
+static const char	*process_dot(const char *ptr, t_elem *elem)
 {
 	elem->is_dot = true;
 	return (ptr + 1);
@@ -26,13 +26,13 @@ static const char	*process_dot(const char *ptr, t_pf_elem *elem)
  * @param args Arguments pointer
  * @return const char* Format string pointer after precision
 ******************************************************************************/
-const char	*pf_parse_precision(const char *ptr, t_pf_elem *elem, va_list args)
+const char	*parse_precision(const char *ptr, t_elem *elem, va_list args)
 {
 	uintmax_t	precision;
 
 	if (*ptr == '.')
 		ptr = process_dot(ptr, elem);
-	ptr = pf_process_width(ptr, &precision, args);
+	ptr = process_width(ptr, &precision, args);
 	if (!ptr)
 		return (NULL);
 	elem->precision = (int)precision;

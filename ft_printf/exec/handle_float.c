@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Checks if number has a sign
@@ -19,7 +19,7 @@
  * @param elem Element
  * @return int 1 if sign, 0 if no sign
 ******************************************************************************/
-int	pf_check_sign_float(long double nb, t_pf_elem *elem)
+int	check_sign_float(long double nb, t_elem *elem)
 {
 	if (ft_isnan(nb) || nb == INFINITY)
 		return (0);
@@ -43,25 +43,25 @@ int	pf_check_sign_float(long double nb, t_pf_elem *elem)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-static int	add_sign(long double nb, t_pf_elem *elem, t_pf_buffer *buffer)
+static int	add_sign(long double nb, t_elem *elem, t_buffer *buffer)
 {
 	if (ft_isnan(nb) || nb == INFINITY)
 		return (EXIT_SUCCESS);
 	if (nb < 0)
 	{
-		if (pf_add_node(buffer, '-') == EXIT_FAILURE)
+		if (add_node(buffer, '-') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	else
 	{
 		if (elem->is_plus)
 		{
-			if (pf_add_node(buffer, '+') == EXIT_FAILURE)
+			if (add_node(buffer, '+') == EXIT_FAILURE)
 				return (EXIT_FAILURE);
 		}
 		else if (elem->is_space)
 		{
-			if (pf_add_node(buffer, ' ') == EXIT_FAILURE)
+			if (add_node(buffer, ' ') == EXIT_FAILURE)
 				return (EXIT_FAILURE);
 		}
 	}
@@ -77,16 +77,16 @@ static int	add_sign(long double nb, t_pf_elem *elem, t_pf_buffer *buffer)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-static int	handle_minus(long double nb, t_pf_elem *elem, t_pf_buffer *buffer)
+static int	handle_minus(long double nb, t_elem *elem, t_buffer *buffer)
 {
 	int	sign_len;
 
-	sign_len = pf_check_sign_float(nb, elem);
+	sign_len = check_sign_float(nb, elem);
 	if (add_sign(nb, elem, buffer) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (pf_add_float_nb(nb, elem, buffer) == EXIT_FAILURE)
+	if (add_float_nb(nb, elem, buffer) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (pf_fill_width(buffer, elem->width - (pf_len_float(nb, elem) \
+	if (fill_width(buffer, elem->width - (len_float(nb, elem) \
 					+ sign_len), ' ') == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
@@ -101,28 +101,28 @@ static int	handle_minus(long double nb, t_pf_elem *elem, t_pf_buffer *buffer)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-static int	handle_default(long double nb, t_pf_elem *elem, t_pf_buffer *buffer)
+static int	handle_default(long double nb, t_elem *elem, t_buffer *buffer)
 {
 	int	sign_len;
 
-	sign_len = pf_check_sign_float(nb, elem);
+	sign_len = check_sign_float(nb, elem);
 	if (elem->is_zero)
 	{
 		if (add_sign(nb, elem, buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (pf_fill_width(buffer, elem->width - (pf_len_float(nb, elem) \
+		if (fill_width(buffer, elem->width - (len_float(nb, elem) \
 						+ sign_len), '0') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	else
 	{
-		if (pf_fill_width(buffer, elem->width - (pf_len_float(nb, elem) \
+		if (fill_width(buffer, elem->width - (len_float(nb, elem) \
 						+ sign_len), ' ') == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		if (add_sign(nb, elem, buffer) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
-	if (pf_add_float_nb(nb, elem, buffer) == EXIT_FAILURE)
+	if (add_float_nb(nb, elem, buffer) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -136,9 +136,9 @@ static int	handle_default(long double nb, t_pf_elem *elem, t_pf_buffer *buffer)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	pf_handle_float(long double nb, t_pf_elem *elem, t_pf_buffer *buffer)
+int	handle_float(long double nb, t_elem *elem, t_buffer *buffer)
 {
-	if (pf_len_float(nb, elem) == -1)
+	if (len_float(nb, elem) == -1)
 		return (EXIT_FAILURE);
 	if (elem->is_minus)
 	{

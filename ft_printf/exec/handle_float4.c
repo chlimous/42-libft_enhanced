@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Gets the length of exponent
@@ -54,7 +54,7 @@ static int	len_exponent(long double nb)
  * @param elem 
  * @return int 
 ******************************************************************************/
-int	pf_len_float_e(long double nb, t_pf_elem *elem)
+int	len_float_e(long double nb, t_elem *elem)
 {
 	uintmax_t	len;
 
@@ -70,7 +70,7 @@ int	pf_len_float_e(long double nb, t_pf_elem *elem)
 	}
 	len += len_exponent(nb);
 	if (len < INT_MAX || (len == INT_MAX && \
-				pf_check_sign_float(nb, elem) == 0))
+				check_sign_float(nb, elem) == 0))
 		return ((int)len);
 	else
 		return (-1);

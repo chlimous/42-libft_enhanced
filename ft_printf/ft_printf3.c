@@ -10,7 +10,7 @@
 /*									      */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Allocates memory and writes to string
@@ -41,15 +41,15 @@ int	ft_asprintf(char **str, const char *format, ...)
 ******************************************************************************/
 int	ft_vasprintf(char **str, const char *format, va_list args)
 {
-	t_pf_buffer	buffer;
+	t_buffer	buffer;
 
 	if (!format)
-		return (PRINTF_ERROR);
-	if (pf_load_buffer(&buffer, format, args) == EXIT_FAILURE)
-		return (PRINTF_ERROR);
+		return (ERROR);
+	if (load_buffer(&buffer, format, args) == EXIT_FAILURE)
+		return (ERROR);
 	*str = malloc(sizeof(char) * (buffer.size + 1));
 	if (!str)
-		return (pf_clear_buffer(buffer), PRINTF_ERROR);
-	pf_buffer_to_string(*str, (size_t)INT_MAX + 1, buffer);
+		return (clear_buffer(buffer), ERROR);
+	buffer_to_string(*str, (size_t)INT_MAX + 1, buffer);
 	return (buffer.size);
 }

@@ -10,7 +10,7 @@
 /*									      */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /******************************************************************************
  * @brief Checks for undefined specifications
@@ -18,7 +18,7 @@
  * @param elem Element
  * @return int Exit status
 ******************************************************************************/
-static int	check_undefined(t_pf_elem *elem)
+static int	check_undefined(t_elem *elem)
 {
 	if (elem->length != NO_LEN && elem->length != L_UP_LEN)
 		return (EXIT_FAILURE);
@@ -33,14 +33,14 @@ static int	check_undefined(t_pf_elem *elem)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	pf_formatid_fe(va_list args, t_pf_elem *elem, t_pf_buffer *buffer)
+int	formatid_fe(va_list args, t_elem *elem, t_buffer *buffer)
 {
 	long double	nb;
 
 	if (check_undefined(elem) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	nb = pf_handle_length_float(args, elem);
-	if (pf_handle_float(nb, elem, buffer) == EXIT_FAILURE)
+	nb = handle_length_float(args, elem);
+	if (handle_float(nb, elem, buffer) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

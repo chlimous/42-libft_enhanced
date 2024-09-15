@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 02:17:59 by chlimous          #+#    #+#             */
-/*   Updated: 2024/02/28 02:03:32 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/14 22:36:21 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ int	ft_atoi(const char *nptr)
 	res = 0;
 	sign = 1;
 	while (ft_isspace(*nptr))
-		nptr++;
+		++nptr;
 	if (*nptr == '-')
 	{
 		sign = -1;
-		nptr++;
+		++nptr;
 	}
 	else if (*nptr == '+')
-		nptr++;
+		++nptr;
 	while (ft_isdigit(*nptr))
 	{
 		res = res * 10 + ft_ascii_to_nb(*nptr);
-		nptr++;
+		++nptr;
 	}
 	return (res * sign);
 }

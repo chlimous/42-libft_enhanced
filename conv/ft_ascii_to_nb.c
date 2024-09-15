@@ -6,11 +6,9 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 01:16:04 by chlimous          #+#    #+#             */
-/*   Updated: 2024/02/28 01:18:01 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/14 22:28:57 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 int	ft_ascii_to_nb(char ascii)
 {

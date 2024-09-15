@@ -6,11 +6,9 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 23:04:23 by chlimous          #+#    #+#             */
-/*   Updated: 2024/02/28 01:21:29 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/14 22:27:12 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 int	ft_isascii(int c)
 {

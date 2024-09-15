@@ -6,29 +6,29 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 20:35:25 by chlimous          #+#    #+#             */
-/*   Updated: 2024/05/01 20:40:07 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 03:33:08 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
 
-bool	gnl_is_eol(t_gnl_node *node)
+int	is_eol(t_node *node)
 {
 	ssize_t	i;
 
 	if (!node)
-		return (false);
+		return (0);
 	i = 0;
 	while (i < node->size)
 	{
 		if (node->content[i] == '\n')
-			return (true);
+			return (1);
 		++i;
 	}
-	return (false);
+	return (0);
 }
 
-ssize_t	gnl_eol_index(t_gnl_node *node)
+ssize_t	get_eol_index(t_node *node)
 {
 	ssize_t	i;
 
@@ -42,7 +42,7 @@ ssize_t	gnl_eol_index(t_gnl_node *node)
 	return (i - 1);
 }
 
-void	gnl_cpy(char *dest, const char *src, ssize_t size)
+void	cpy(char *dest, const char *src, ssize_t size)
 {
 	ssize_t	i;
 
@@ -50,6 +50,6 @@ void	gnl_cpy(char *dest, const char *src, ssize_t size)
 	while (i < size)
 	{
 		dest[i] = src[i];
-		i++;
+		++i;
 	}
 }

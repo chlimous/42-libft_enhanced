@@ -6,11 +6,11 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:51:51 by chlimous          #+#    #+#             */
-/*   Updated: 2023/12/31 05:10:13 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/15 01:35:17 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stddef.h>
 
 void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 {
@@ -22,7 +22,7 @@ void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 		((char *)dest)[i] = ((char *)src)[i];
 		if ((char)c == ((char *)src)[i])
 			return (dest + i + 1);
-		i++;
+		++i;
 	}
 	return (NULL);
 }
