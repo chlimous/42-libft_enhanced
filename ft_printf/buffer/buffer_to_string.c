@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/03/04 17:19:07 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/04/13 20:21:47 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/18 01:12:07 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	buffer_to_string(char *str, size_t size, t_buffer buffer)
 		++i;
 		current = current->next;
 	}
-	str[i] = '\0';
+	if (size > 0)
+		str[i] = '\0';
 	clear_buffer(buffer);
 }
