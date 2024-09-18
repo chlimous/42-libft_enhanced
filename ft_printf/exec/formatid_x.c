@@ -18,7 +18,7 @@
  * @param elem Element
  * @return char* Base
 ******************************************************************************/
-static char	*get_base(t_elem *elem)
+static char	*get_base(t_pf_elem *elem)
 {
 	if (elem->formatid == 'x')
 		return (BASE_16_LOW);
@@ -33,7 +33,7 @@ static char	*get_base(t_elem *elem)
  * @param elem Element
  * @return int Exit status
 ******************************************************************************/
-static int	check_undefined(t_elem *elem)
+static int	check_undefined(t_pf_elem *elem)
 {
 	if (elem->is_space || elem->is_plus)
 		return (EXIT_FAILURE);
@@ -50,14 +50,14 @@ static int	check_undefined(t_elem *elem)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	formatid_x(va_list args, t_elem *elem, t_buffer *buffer)
+int	pf_formatid_x(va_list args, t_pf_elem *elem, t_pf_buffer *buffer)
 {
 	uintmax_t	nb;
 
 	if (check_undefined(elem) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	nb = handle_length_unsigned(args, elem);
-	if (handle_unsigned(nb, get_base(elem), elem, buffer) == EXIT_FAILURE)
+	nb = pf_handle_length_unsigned(args, elem);
+	if (pf_handle_unsigned(nb, get_base(elem), elem, buffer) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

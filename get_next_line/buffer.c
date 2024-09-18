@@ -6,17 +6,17 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 20:35:21 by chlimous          #+#    #+#             */
-/*   Updated: 2024/09/15 03:20:15 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:39:59 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static t_node	*new_node(char *content)
+static t_gnl_node	*new_node(char *content)
 {
-	t_node	*new;
+	t_gnl_node	*new;
 
-	new = malloc(sizeof(t_node));
+	new = malloc(sizeof(t_gnl_node));
 	if (!new)
 		return (NULL);
 	new->content = content;
@@ -24,7 +24,7 @@ static t_node	*new_node(char *content)
 	return (new);
 }
 
-static void	add_back(t_buffer *buffer, t_node *new)
+static void	add_back(t_gnl_buffer *buffer, t_gnl_node *new)
 {
 	if (buffer->tail)
 	{
@@ -40,9 +40,9 @@ static void	add_back(t_buffer *buffer, t_node *new)
 	}
 }
 
-void	clear_buffer(t_buffer *buffer)
+void	gnl_clear_buffer(t_gnl_buffer *buffer)
 {
-	t_node	*next;
+	t_gnl_node	*next;
 
 	while (buffer->head)
 	{
@@ -55,9 +55,9 @@ void	clear_buffer(t_buffer *buffer)
 	buffer->size = 0;
 }
 
-void	partial_clear_buffer(t_buffer *buffer)
+void	gnl_partial_clear_buffer(t_gnl_buffer *buffer)
 {
-	t_node	*next;
+	t_gnl_node	*next;
 
 	while (buffer->head->next)
 	{
@@ -70,9 +70,9 @@ void	partial_clear_buffer(t_buffer *buffer)
 	buffer->size = 1;
 }
 
-int	add_node(t_buffer *buffer, char *content)
+int	gnl_add_node(t_gnl_buffer *buffer, char *content)
 {
-	t_node	*new;
+	t_gnl_node	*new;
 
 	new = new_node(content);
 	if (!new)

@@ -20,25 +20,25 @@
  * @param args Arguments pointer
  * @return int Exit status
 ******************************************************************************/
-int	load_buffer(t_buffer *buffer, const char *format, va_list args)
+int	pf_load_buffer(t_pf_buffer *buffer, const char *format, va_list args)
 {
-	t_elem		elem;
+	t_pf_elem		elem;
 
-	ft_bzero(buffer, sizeof(t_buffer));
+	ft_bzero(buffer, sizeof(t_pf_buffer));
 	while (*format)
 	{
 		if (*format == '%')
 		{
-			format = parse_elem(format + 1, &elem, args);
+			format = pf_parse_elem(format + 1, &elem, args);
 			if (!format)
-				return (clear_buffer(*buffer), EXIT_FAILURE);
+				return (pf_clear_buffer(*buffer), EXIT_FAILURE);
 			if (elem.formatid_handler(args, &elem, buffer) == EXIT_FAILURE)
-				return (clear_buffer(*buffer), EXIT_FAILURE);
+				return (pf_clear_buffer(*buffer), EXIT_FAILURE);
 		}
 		else
 		{
-			if (add_node(buffer, *format) == EXIT_FAILURE)
-				return (clear_buffer(*buffer), EXIT_FAILURE);
+			if (pf_add_node(buffer, *format) == EXIT_FAILURE)
+				return (pf_clear_buffer(*buffer), EXIT_FAILURE);
 			++format;
 		}
 	}

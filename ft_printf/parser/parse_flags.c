@@ -20,10 +20,10 @@
  * @param args Arguments pointer
  * @return const char* Format string pointer after flags
 ******************************************************************************/
-const char	*parse_flags(const char *ptr, t_elem *elem, va_list args)
+const char	*pf_parse_flags(const char *ptr, t_pf_elem *elem, va_list args)
 {
-	const char *(*const	set_flag[])(const char *, t_elem *) = \
-	{set_minus, set_plus, set_space, set_hash, set_zero, 0};
+	const char *(*const	set_flag[])(const char *, t_pf_elem *) = \
+	{pf_set_minus, pf_set_plus, pf_set_space, pf_set_hash, pf_set_zero, 0};
 	int					i;
 
 	(void)args;

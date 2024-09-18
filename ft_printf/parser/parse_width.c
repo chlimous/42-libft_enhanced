@@ -20,12 +20,12 @@
  * @param args Arguments pointer
  * @return const char* Format string pointer after width
 ******************************************************************************/
-const char	*parse_width(const char *ptr, t_elem *elem, va_list args)
+const char	*pf_parse_width(const char *ptr, t_pf_elem *elem, va_list args)
 {
 	uintmax_t	width;
 
 	(void)elem;
-	ptr = process_width(ptr, &width, args);
+	ptr = pf_process_width(ptr, &width, args);
 	if (!ptr)
 		return (NULL);
 	elem->width = (int)width;

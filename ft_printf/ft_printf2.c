@@ -77,12 +77,12 @@ int	ft_vsprintf(char *str, const char *format, va_list args)
 ******************************************************************************/
 int	ft_vsnprintf(char *str, size_t size, const char *format, va_list args)
 {
-	t_buffer	buffer;
+	t_pf_buffer	buffer;
 
 	if (!format)
-		return (ERROR);
-	if (load_buffer(&buffer, format, args) == EXIT_FAILURE)
-		return (ERROR);
-	buffer_to_string(str, size, buffer);
+		return (PRINTF_ERROR);
+	if (pf_load_buffer(&buffer, format, args) == EXIT_FAILURE)
+		return (PRINTF_ERROR);
+	pf_buffer_to_string(str, size, buffer);
 	return (buffer.size);
 }

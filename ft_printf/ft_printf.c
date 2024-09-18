@@ -40,14 +40,14 @@ int	ft_printf(const char *format, ...)
 ******************************************************************************/
 int	ft_vdprintf(int fd, const char *format, va_list args)
 {
-	t_buffer	buffer;
+	t_pf_buffer	buffer;
 
 	if (!format)
-		return (ERROR);
-	if (load_buffer(&buffer, format, args) == EXIT_FAILURE)
-		return (ERROR);
-	if (flush(buffer, fd) == EXIT_FAILURE)
-		return (ERROR);
+		return (PRINTF_ERROR);
+	if (pf_load_buffer(&buffer, format, args) == EXIT_FAILURE)
+		return (PRINTF_ERROR);
+	if (pf_flush(buffer, fd) == EXIT_FAILURE)
+		return (PRINTF_ERROR);
 	return (buffer.size);
 }
 

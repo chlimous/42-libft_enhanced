@@ -18,7 +18,7 @@
  * @param buffer Buffer pointer
  * @param new New node
 ******************************************************************************/
-void	add_back(t_buffer *buffer, t_node *new)
+void	pf_add_back(t_pf_buffer *buffer, t_pf_node *new)
 {
 	if (buffer->size)
 	{

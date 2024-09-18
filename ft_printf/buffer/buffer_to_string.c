@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2024/03/04 17:19:07 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/09/18 01:12:07 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/09/18 02:26:46 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
  * @param size Maximum number of bytes to add to the string, '\0' included
  * @param buffer Buffer
 ******************************************************************************/
-void	buffer_to_string(char *str, size_t size, t_buffer buffer)
+void	pf_buffer_to_string(char *str, size_t size, t_pf_buffer buffer)
 {
-	t_node			*current;
-	size_t			i;
+	t_pf_node	*current;
+	size_t		i;
 
 	current = buffer.head;
 	i = 0;
@@ -34,5 +34,5 @@ void	buffer_to_string(char *str, size_t size, t_buffer buffer)
 	}
 	if (size > 0)
 		str[i] = '\0';
-	clear_buffer(buffer);
+	pf_clear_buffer(buffer);
 }

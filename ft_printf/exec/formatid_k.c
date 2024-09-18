@@ -45,7 +45,7 @@ static char	*check_base(char *base)
  * @param elem Element
  * @return int Exit status
 ******************************************************************************/
-static int	check_undefined(t_elem *elem)
+static int	check_undefined(t_pf_elem *elem)
 {
 	if (elem->is_hash || elem->is_space || elem->is_plus)
 		return (EXIT_FAILURE);
@@ -62,20 +62,20 @@ static int	check_undefined(t_elem *elem)
  * @param buffer Buffer pointer
  * @return int Exit status
 ******************************************************************************/
-int	formatid_k(va_list args, t_elem *elem, t_buffer *buffer)
+int	pf_formatid_k(va_list args, t_pf_elem *elem, t_pf_buffer *buffer)
 {
 	uintmax_t		nb;
 	char			*base;
 
 	if (check_undefined(elem) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	nb = handle_length_unsigned(args, elem);
+	nb = pf_handle_length_unsigned(args, elem);
 	base = check_base(va_arg(args, char *));
 	if (!base)
 		return (EXIT_FAILURE);
 	if (base[0] != '0')
 		elem->precision = 0;
-	if (handle_unsigned(nb, base, elem, buffer) == EXIT_FAILURE)
+	if (pf_handle_unsigned(nb, base, elem, buffer) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

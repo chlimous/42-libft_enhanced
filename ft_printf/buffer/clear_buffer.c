@@ -17,10 +17,10 @@
  * 
  * @param buffer Buffer
 ******************************************************************************/
-void	clear_buffer(t_buffer buffer)
+void	pf_clear_buffer(t_pf_buffer buffer)
 {
-	t_node	*current;
-	t_node	*tmp;
+	t_pf_node	*current;
+	t_pf_node	*tmp;
 
 	current = buffer.head;
 	while (current)
