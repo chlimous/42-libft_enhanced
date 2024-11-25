@@ -6,13 +6,13 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 04:41:08 by chlimous          #+#    #+#             */
-/*   Updated: 2024/09/15 02:41:54 by chlimous         ###   ########.fr       */
+/*   Updated: 2024/11/25 02:05:36 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-char	*ft_strncpy(char *dest, char *src, size_t size)
+char	*ft_strncpy(char *dest, const char *src, size_t size)
 {
 	size_t	i;
 
