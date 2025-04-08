@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/09/07 00:26:57 by chlimous	       #+#    #+#	      */
-/*   Updated: 2024/09/15 19:45:01 by chlimous         ###   ########.fr       */
+/*   Updated: 2025/04/09 01:19:00 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ ssize_t	ft_putstr_fd(char *str, int fd);
 
 // str
 char	**ft_split(char const *s, char const *sep_charset);
+char	*ft_str_realloc(char *str, size_t size);
 char	*ft_strchr(const char *s, int c);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strcpy(char *dest, const char *src);
