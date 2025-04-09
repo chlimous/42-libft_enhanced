@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 20:35:18 by chlimous          #+#    #+#             */
-/*   Updated: 2024/05/01 20:45:55 by chlimous         ###   ########.fr       */
+/*   Updated: 2025/04/09 10:05:28 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static size_t	line_len(t_gnl_buffer *buffer, ssize_t eol_index)
 	if (buffer->size >= 2)
 		size += buffer->head->size;
 	if (buffer->size > 2)
-		size += (buffer->size - 2) * BUFFER_SIZE;
+		size += (buffer->size - 2) * GNL_BUFFER_SIZE;
 	return (size);
 }
 
@@ -68,8 +68,8 @@ static void	buffer_to_string(t_gnl_buffer buffer, char *line, \
 		}
 		else
 		{
-			gnl_cpy(line + line_i, buffer.head->content, BUFFER_SIZE);
-			line_i += BUFFER_SIZE;
+			gnl_cpy(line + line_i, buffer.head->content, GNL_BUFFER_SIZE);
+			line_i += GNL_BUFFER_SIZE;
 		}
 		++node_i;
 		buffer.head = buffer.head->next;
@@ -96,7 +96,7 @@ static size_t	get_line(t_gnl_buffer *buffer, char **line)
 
 size_t	get_next_line(int fd, char **line, int flag)
 {
-	static t_gnl_buffer	buffer[FD_MAX + 1];
+	static t_gnl_buffer	buffer[GNL_FD_MAX + 1];
 	ssize_t				bytesread;
 	char				*content;
 
@@ -105,10 +105,10 @@ size_t	get_next_line(int fd, char **line, int flag)
 	bytesread = 1;
 	while (bytesread > 0 && !gnl_is_eol(buffer[fd].tail))
 	{
-		content = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		content = malloc(sizeof(char) * (GNL_BUFFER_SIZE + 1));
 		if (!content)
 			return (gnl_clear_buffer(&buffer[fd]), -1);
-		bytesread = read(fd, content, BUFFER_SIZE);
+		bytesread = read(fd, content, GNL_BUFFER_SIZE);
 		if (bytesread == -1)
 			return (free(content), gnl_clear_buffer(&buffer[fd]), -1);
 		else if (bytesread == 0)

@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 20:50:18 by chlimous          #+#    #+#             */
-/*   Updated: 2024/09/18 02:46:02 by chlimous         ###   ########.fr       */
+/*   Updated: 2025/04/09 10:04:15 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 # include <stdlib.h>
 # include <stdbool.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+# ifndef GNL_BUFFER_SIZE
+#  define GNL_BUFFER_SIZE 42
 # endif
 
-# ifndef FD_MAX
-#  define FD_MAX 100
+# ifndef GNL_FD_MAX
+#  define GNL_FD_MAX 100
 # endif
 
 # define GNL_FLUSH -1
