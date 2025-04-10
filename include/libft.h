@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/09/07 00:26:57 by chlimous	       #+#    #+#	      */
-/*   Updated: 2025/04/09 01:19:00 by chlimous         ###   ########.fr       */
+/*   Updated: 2025/04/10 21:52:10 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -19,12 +19,6 @@
 
 // get_next_line
 # define FLUSH -1
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}	t_list;
 
 // check
 int		ft_isalnum(int c);
@@ -57,17 +51,6 @@ int		ft_vasprintf(char **str, const char *format, va_list args);
 
 // get_next_line
 size_t	get_next_line(int fd, char **line, int flag);
-
-// list
-t_list	*ft_lstadd_back(t_list **lst, t_list *new);
-t_list	*ft_lstadd_front(t_list **lst, t_list *new);
-void	ft_lstclear(t_list **lst, void (*del)(void*));
-void	ft_lstdelone(t_list *lst, void (*del)(void*));
-void	ft_lstiter(t_list *lst, void (*f)(void *));
-t_list	*ft_lstlast(t_list *lst);
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-t_list	*ft_lstnew(void *content);
-size_t	ft_lstsize(t_list *lst);
 
 // maths
 int		ft_isnan(long double x);

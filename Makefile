@@ -6,13 +6,12 @@
 #    By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	       #
 #						  +#+#+#+#+#+	+#+	       #
 #    Created: 2023/12/13 15:29:55 by chlimous	       #+#    #+#	       #
-#    Updated: 2025/04/09 01:19:25 by chlimous         ###   ########.fr        #
+#    Updated: 2025/04/10 21:51:47 by chlimous         ###   ########.fr        #
 #									       #
 # **************************************************************************** #
 
 NAME = libft.a
 
-SRCS += $(addprefix list/, ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c)
 SRCS += $(addprefix print/, ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c)
 SRCS += $(addprefix mem/, ft_bzero.c ft_calloc.c ft_free_pp.c ft_memccpy.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c)
 SRCS += $(addprefix conv/, ft_atoi.c ft_atof.c ft_itoa.c ft_tolower.c ft_toupper.c ft_ascii_to_nb.c)
