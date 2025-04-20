@@ -6,13 +6,13 @@
 /*   By: chlimous <chlimous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 01:42:04 by chlimous          #+#    #+#             */
-/*   Updated: 2024/09/15 01:56:47 by chlimous         ###   ########.fr       */
+/*   Updated: 2025/04/20 19:39:35 by chlimous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-void	ft_rev_int_tab(int *tab, size_t size)
+void	ft_rev_int_array(int *array, size_t size)
 {
 	size_t	i;
 	int		temp;
@@ -20,9 +20,9 @@ void	ft_rev_int_tab(int *tab, size_t size)
 	i = 0;
 	while (i < size / 2)
 	{
-		temp = tab[i];
-		tab[i] = tab[size - i - 1];
-		tab[size - i - 1] = temp;
+		temp = array[i];
+		array[i] = array[size - i - 1];
+		array[size - i - 1] = temp;
 		++i;
 	}
 }

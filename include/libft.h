@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/09/07 00:26:57 by chlimous	       #+#    #+#	      */
-/*   Updated: 2025/04/10 21:52:10 by chlimous         ###   ########.fr       */
+/*   Updated: 2025/04/20 19:40:32 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, size_t start, size_t len);
 size_t	ft_wcslen(const wchar_t *str);
 
-// tab
-void	ft_rev_int_tab(int *tab, size_t size);
+// array
+void	ft_rev_int_array(int *tab, size_t size);
 
 #endif
