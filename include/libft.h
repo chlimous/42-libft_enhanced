@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/09/07 00:26:57 by chlimous	       #+#    #+#	      */
-/*   Updated: 2025/04/20 20:04:03 by chlimous         ###   ########.fr       */
+/*   Updated: 2025/04/20 20:18:07 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int		ft_isnan(long double x);
 // mem
 void	ft_bzero(void *mem, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
-void	ft_free_pp(void **pp);
 void	*ft_memccpy(void *dest, const void *src, int c, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
