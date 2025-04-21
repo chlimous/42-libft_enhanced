@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2025/04/20 19:50:40 by chlimous	       #+#    #+#	      */
-/*   Updated: 2025/04/20 20:20:46 by chlimous         ###   ########.fr       */
+/*   Updated: 2025/04/21 17:51:09 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_free_strs_array(char ***array)
 {
 	size_t	i;
 
+	if (!array)
+		return ;
 	i = 0;
 	while (array[i])
 	{
