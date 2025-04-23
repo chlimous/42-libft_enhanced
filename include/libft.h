@@ -6,7 +6,7 @@
 /*   By: chlimous <chlimous@student.42.fr>	    +#+  +:+	   +#+	      */
 /*						  +#+#+#+#+#+	+#+	      */
 /*   Created: 2023/09/07 00:26:57 by chlimous	       #+#    #+#	      */
-/*   Updated: 2025/04/20 20:18:07 by chlimous         ###   ########.fr       */
+/*   Updated: 2025/04/23 04:46:24 by chlimous         ###   ########.fr       */
 /*									      */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ char	*ft_strncpy(char *dest, char *src, size_t size);
 char	*ft_strndup(const char *src, size_t size);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strrchr(const char *s, int c);
+size_t	ft_strslen(const char **strs);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, size_t start, size_t len);
 size_t	ft_wcslen(const wchar_t *str);
